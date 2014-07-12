@@ -1,0 +1,54 @@
+mlv                 Estimation of the Mode
+plot.mlv            Plot an mlv object
+print.mlv           Print an mlv object
+as.numeric.mlv      Convert an mlv object to a numeric
+
+mfv                 Most frequent value
+lientz              Lientz's empirical function
+naive               The Chernoff mode estimate
+venter              The Venter mode estimate
+grenander           The Grenander mode estimate
+hsm                 Half sample mode
+hrm                 Half range mode
+parzen              Parzen's kernel mode estimate
+tsybakov            The Tsybakov mode estimate
+asselin             The Asselin de Beauville mode estimate
+
+skewness            Skewness
+skewness.default    Skewness
+
+betaMode            Mode of the Beta distribution
+cauchyMode          Mode of the Cauchy distribution
+chisqMode           Mode of the Chisquare distribution
+expMode             Mode of the Exponential distribution
+fMode               Mode of the F distribution
+fiskMode            Mode of the Fisk distribution
+gammaMode           Mode of the Gamma distribution
+normMode            Mode of the Normal distribution
+gevMode             Mode of the Generalised Extreme Value distribution
+ghMode              Mode of the Generalised Hyperbolic distribution
+gompertzMode        Mode of the Gombertz distribution
+gpdMode             Mode of the Generalised Pareto distribution
+gumbelMode          Mode of the Gumbel distribution
+hypMode             Mode of the Hyperbolic distribution
+koenkerMode         Mode of the Koenker distribution
+kumarMode           Mode of the Kumaraswamy distribution
+laplaceMode         Mode of the Laplace distribution
+logisMode           Mode of the Logistic distribution
+lnormMode           Mode of the Lognormal distribution
+nigMode             Mode of the Negative Inverse Gaussian distribution
+paralogisticMode    Mode of the Paralogistic distribution
+paretoMode          Mode of the Pareto distribution
+rayleighMode        Mode of the Rayleigh distribution
+stableMode          Mode of the Stable distribution
+rweibullMode        Mode of the Reversed Weibull distribution
+tMode               Mode of the T (Student) distribution
+unifMode            Mode of the Uniform distribution
+weibullMode         Mode of the Weibull distribution
+
+bernMode            Mode of the Bernoulli distribution
+binomMode           Mode of the Binomial distribution
+geomMode            Mode of the Geometric distribution
+hyperMode           Mode of the Hypergeometric distribution
+nbinomMode          Mode of the Negative Binomial distribution
+poisMode            Mode of the Poisson distribution

@@ -1,0 +1,31 @@
+import("stats")
+#importFrom("evd", "pfrechet", "pgev", "pgpd", "pgumbel", "prweibull")
+#importFrom("fBasics", "pgh", "phyp", "pnig", "dstable", "pstable", "psymstb")
+
+useDynLib("modeest")
+
+exportPattern("^[^\\.]") # exporte toutes les variables qui ne commencent pas par '.'
+
+#export("mlv", "mlv.default", "mlv.factor", "mlv.integer") 
+
+S3method(plot, mlv)      # il n'est pas nécessaire d'exporter ces fonctions
+#S3method(plot, .kernel)
+S3method(plot, lientz)
+
+S3method(print, mlv)
+S3method(as.numeric, mlv)
+
+#S3method(print, .kernel)
+S3method(print, lientz)
+
+## Faut-il mettre :
+S3method("mlv", "default")
+S3method("mlv", "character")
+S3method("mlv", "factor")
+S3method("mlv", "integer")
+S3method("mlv", "lientz")
+S3method("mlv", "density")
+S3method("skewness", "default")
+#...
+
+
