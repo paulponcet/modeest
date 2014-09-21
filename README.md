@@ -15,7 +15,7 @@ Here are some perspectives I would like to develop with the GitHub community:
   - multimodality tests, 
   - highest density region estimation and visualization. 
 
-
+## Installation instructions
 The *release* version of `modeest` can be installed from [CRAN](http://cran.r-project.org/web/packages/modeest/).
 ```
 install.packages("modeest")
