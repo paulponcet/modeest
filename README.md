@@ -14,3 +14,15 @@ Here are some perspectives I would like to develop with the GitHub community:
   - mean-shift algorithm and related methods (e.g. mode tree), 
   - multimodality tests, 
   - highest density region estimation and visualization. 
+
+
+The *release* version of `modeest` can be installed from [CRAN](http://cran.r-project.org/web/packages/modeest/).  **It was submitted 2014-09-19, and sometimes takes a few days for the binaries to be replicated on all the mirrors.**
+```
+install.packages("modeest")
+```
+
+The *development* version of modeest can be installed from [GitHub](https://github.com/polmath/modeest) after installing the `devtools` package.
+```
+install.packages("devtools")
+devtools::install_github(repo="polmath/modeest")
+```
