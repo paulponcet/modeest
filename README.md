@@ -16,7 +16,7 @@ Here are some perspectives I would like to develop with the GitHub community:
   - highest density region estimation and visualization. 
 
 
-The *release* version of `modeest` can be installed from [CRAN](http://cran.r-project.org/web/packages/modeest/).  **It was submitted 2014-09-19, and sometimes takes a few days for the binaries to be replicated on all the mirrors.**
+The *release* version of `modeest` can be installed from [CRAN](http://cran.r-project.org/web/packages/modeest/).
 ```
 install.packages("modeest")
 ```
