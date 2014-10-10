@@ -11,11 +11,11 @@ function(x,                    #Vector of the mono-valued dataset
          jitterOrHist = 0)     #Flag indicating the representation of the data in the lower part of the graphical representation. - 0 : automatic 1 : jittered density diagram 2 : histogram
 {
 
-  #définition des dimensions de la matrice image
+  #dÃ©finition des dimensions de la matrice image
   minx <- min(x);
   maxx <- max(x);
   rangex <- maxx - minx;
-  newMinx <- minx-percentMargin*rangex; #on va jusqu'à un pourcentage au-dela des valeurs extremales
+  newMinx <- minx-percentMargin*rangex; #on va jusqu'Ã  un pourcentage au-dela des valeurs extremales
   newMaxx <- maxx+percentMargin*rangex;
   axeAbs <- seq(from = newMinx, to = newMaxx, length = width);
   precision <- axeAbs[2]-axeAbs;
@@ -46,7 +46,7 @@ function(x,                    #Vector of the mono-valued dataset
   image(t(MatConv), col = heat.colors(24), axes=F);
   par(mar=c(2,3,1,1))
   if(jitterOrHist == 0) { 
-    if(length(x < 150) {
+    if( length(x < 150) ) {
       jitterOrHist = 1
     } else{ 
       jitterOrHist = 2
