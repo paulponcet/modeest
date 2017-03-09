@@ -3,11 +3,10 @@
 
 .noGenerics <- TRUE
 
-.onLoad <-
+.onAttach <-
 function(libname,
          pkgname)
 {
-  #! J'ai l'impression que dans les good practices,  packageStartupMessage doit plutôt être appelée dans .onAttach...
   packageStartupMessage("\nThis is package 'modeest' written by P. PONCET.\nFor a complete list of functions, use 'library(help = \"modeest\")' or 'help.start()'.\n")
 }
 
@@ -16,4 +15,3 @@ function(libpath)
 {
   library.dynam.unload("modeest", libpath)
 }
-
