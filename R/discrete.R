@@ -14,7 +14,13 @@ function(x,   # sample (the data, assumed to come from a discrete law)
   tf <- tabulate(f)
 
   ## Output
-  return(as.numeric(levels(f)[tf==max(tf)]))
+  return(switch(class(x),
+                'integer' = as.integer(levels(f)[tf==max(tf)]),
+                'numeric' = as.numeric(levels(f)[tf==max(tf)]),
+                'character' = as.character(levels(f)[tf==max(tf)]),
+                levels(f)[tf==max(tf)]
+                )
+  )
 }
 
 # Alias
