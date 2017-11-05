@@ -1,45 +1,102 @@
-# Author: P. Poncet
-
+#' @title 
+#' The Meanshift mode estimator
+#' 
+#' @description 
+#' The Meanshift mode estimator. 
+#' 
+#' @note 
+#' The user should preferentially call \code{meanshift} through 
+#' \code{mlv(x, method = "meanshift", ...)}. 
+#' 
+#' @references 
+#' \itemize{ 
+#'   \item Fukunaga, K. and Hostetler, L. (1975).  
+#'   The estimation of the gradient of a density function, 
+#'   with applications in pattern recognition. 
+#'   \emph{IEEE Transactions on Information Theory}, \bold{21}(1):32--40. 
+#' }
+#' 
+#' @param x
+#' numeric. Vector of observations. 
+#' 
+#' @param bw
+#' numeric. The smoothing bandwidth to be used. 
+#' 
+#' @param kernel
+#' character. The kernel to be used. Available kernels are 
+#' \code{"biweight"}, \code{"cosine"}, \code{"eddy"}, 
+#' \code{"epanechnikov"}, \code{"gaussian"}, \code{"optcosine"}, 
+#' \code{"rectangular"}, \code{"triangular"}, \code{"uniform"}. 
+#' See \code{\link[stats]{density}} for more details on some of these kernels. 
+#' 
+#' @param par
+#' numeric. The initial value used in the meanshift algorithm. 
+#' 
+#' @param iter
+#' numeric. Maximal number of iterations. 
+#' 
+#' @param tolerance
+#' numeric. Stopping criteria.
+#' 
+#' @return 
+#' \code{meanshift} returns a numeric value, the mode estimate, 
+#' with an attribute \code{"iterations"}. 
+#' The number of iterations can be less than \code{iter} 
+#' if the stopping criteria specified by \code{eps} is reached. 
+#' 
+#' @seealso 
+#' \code{\link[modeest]{mlv}}, \code{\link[modeest]{tsybakov}}. 
+#' 
+#' @importFrom stats bw.SJ bw.nrd0 bw.nrd bw.ucv bw.bcv
+#' @importFrom statip kernelfun
+#' @export
+#' 
+#' @examples 
+#' # Unimodal distribution
+#' x <- rweibull(100, shape = 12, scale = 0.8)
+#' 
+#' ## True mode
+#' weibullMode(shape = 12, scale = 0.8)
+#' 
+#' ## Estimate of the mode
+#' mlv(x, method = "meanshift", par = mean(x))
+#' 
 meanshift <-
 function(x,
          bw = NULL,
          kernel = "gaussian",
          par = shorth(x),
          iter = 1000,
-         eps = 1e-08)
+         tolerance = sqrt(.Machine$double.eps))
 {
-  if (is.null(bw)) bw <- bw.SJ(x)
+  if (is.null(bw)) bw <- "nrd0"
   if (is.character(bw)) {
-    if (nx < 2) 
+    if (length(x) < 2L) 
       stop("need at least 2 points to select a bandwidth automatically")
-    bw <- switch(tolower(bw), nrd0 = bw.nrd0(x), nrd = bw.nrd(x), 
-                 ucv = bw.ucv(x), bcv = bw.bcv(x), sj = , 
-                 "sj-ste" = bw.SJ(x, method = "ste"), 
-                 "sj-dpi" = bw.SJ(x, method = "dpi"), 
+    bw <- switch(tolower(bw), 
+                 nrd0 = stats::bw.nrd0(x), 
+                 nrd = stats::bw.nrd(x), 
+                 ucv = stats::bw.ucv(x), 
+                 bcv = stats::bw.bcv(x), 
+                 sj = , 
+                 `sj-ste` = stats::bw.SJ(x, method = "ste"), 
+                 `sj-dpi` = stats::bw.SJ(x, method = "dpi"), 
                  stop("unknown bandwidth rule"))
   }
   s <- 0
-  #th <- rep(0, iter)
-  #Mrec <- c()
-  x0 <- par
-  for (j in 1:iter) {
+  for (j in seq_len(iter)) {
     z <- (x - par)/bw
-    k <- do.call(paste(".kernel.", kernel, sep = ""), list(z))$k
+    k <- statip::kernelfun(kernel)(z)
     M <- crossprod(x, k)/sum(k)
-    #Mrec[j] <- M
-    if (is.nan(M)) stop("sum(g) is zero in the meanshift function. Change the bandwidth 'bw' or the initial value 'par'.")
-    #th[j] <- sum((M - par)^2)/sum(par^2)
-    th <- sum((M - par)^2)/sum(par^2)
-    #if (th[j] < eps) {
-    if (th < eps) {
+    if (is.nan(M)) stop("sum(k) is zero in the meanshift function. Change the 
+                         bandwidth 'bw' or the initial value 'par'.")
+    th <- abs(M/par-1)
+    if (th < tolerance) {
       s <- j
       break
     }
-    par <- M
+    par <- as.vector(M)
   }
-  #attr(M, "meanshift.points") <- Mrec[1:s]
-  #attr(M, "threshold.values") <- th[1:s]
-  attr(M, "iterations") <- s
-  #attr(M, "start") <- x0
-  return(M)
+  attr(par, "iterations") <- s
+  par
 }

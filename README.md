@@ -1,28 +1,23 @@
-modeest
-=======
+# modeest: estimation of the mode
 
-This is the GitHub repository of the R package modeest. 
+[![Travis-CI Build Status](https://travis-ci.org/paulponcet/modeest.svg?branch=master)](https://travis-ci.org/paulponcet/modeest) 
 
-This package intends to provide estimators of the mode of univariate unimodal 
+The package 'modeest' provides estimators of the mode of univariate unimodal 
 (and sometimes multimodal) data and values of the modes of usual probability 
 distributions. 
 
-Here are some perspectives I would like to develop with the GitHub community: 
-  - confidence interval estimation, 
-  - new estimators of the mode, 
-  - multivariate mode estimation, 
-  - mean-shift algorithm and related methods (e.g. mode tree), 
-  - multimodality tests, 
-  - highest density region estimation and visualization. 
 
-## Installation instructions
-The *release* version of `modeest` can be installed from [CRAN](http://cran.r-project.org/web/packages/modeest/).
-```
+## Installation
+
+You can install the *release* version of `modeest` from the [CRAN](http://cran.r-project.org/web/packages/modeest/) with: 
+
+```R
 install.packages("modeest")
 ```
 
-The *development* version of modeest can be installed from [GitHub](https://github.com/polmath/modeest) after installing the `devtools` package.
-```
-install.packages("devtools")
-devtools::install_github(repo="polmath/modeest")
+You can install the *development* version of `modeest` from GitHub with:
+
+```R
+# install.packages("devtools")
+devtools::install_github("paulponcet/modeest")
 ```

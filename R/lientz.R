@@ -1,13 +1,114 @@
-# Author: P. Poncet
-
+#' @title 
+#' The empirical Lientz function and the Lientz mode estimator
+#' 
+#' @description 
+#' The Lientz mode estimator is nothing but the value minimizing the empirical 
+#' Lientz function. A 'plot' and a 'print' methods are provided. 
+#' 
+#' @references 
+#' \itemize{
+#'   \item Lientz B.P. (1969).
+#'   On estimating points of local maxima and minima of density functions.
+#'   \emph{Nonparametric Techniques in Statistical Inference (ed. M.L. Puri, Cambridge University Press}, p.275-282.
+#'   
+#'   \item Lientz B.P. (1970).
+#'   Results on nonparametric modal intervals.
+#'   \emph{SIAM J. Appl. Math.}, \bold{19}:356-366.
+#'   
+#'   \item Lientz B.P. (1972).
+#'   Properties of modal intervals.
+#'   \emph{SIAM J. Appl. Math.}, \bold{23}:1-5.
+#' }
+#' 
+#' @details 
+#' The Lientz function is the smallest non-negative quantity \eqn{S(x,\beta)}{S(x,b)}, 
+#' where \eqn{\beta}{b} = \code{bw}, such that 
+#' \deqn{F(x+S(x,\beta)) - F(x-S(x,\beta)) \geq \beta.}{F(x+S(x,b)) - F(x-S(x,b)) >= b.} 
+#' Lientz (1970) provided a way to estimate \eqn{S(x,\beta)}{S(x,b)}; this estimate 
+#' is what we call the empirical Lientz function. 
+#' 
+#' @note 
+#' The user should preferentially call \code{mlv.lientz} through 
+#' \code{mlv(x, method = "lientz", ...)}. 
+#' 
+#' @param x 
+#' numeric (vector of observations) or an object of class \code{"lientz"}.
+#' 
+#' @param bw
+#' numeric. The smoothing bandwidth to be used. 
+#' Should belong to (0, 1). Parameter 'beta' in Lientz (1970) function.
+#' 
+#' @param abc
+#' logical. If \code{FALSE} (the default), the Lientz empirical function 
+#' is minimised using \code{\link[stats]{optim}}.
+#' 
+#' @param par
+#' numeric. The initial value used in \code{\link[stats]{optim}}.
+#' 
+#' @param optim.method
+#' character. If \code{abc = FALSE}, the method used in 
+#' \code{\link[stats]{optim}}.
+#' 
+#' @param zoom
+#' logical. If \code{TRUE}, one can zoom on the graph created.
+#' 
+#' @param digits
+#' numeric. Number of digits to be printed.
+#' 
+#' @param ...
+#' if \code{abc = FALSE}, further arguments to be passed to 
+#' \code{\link[stats]{optim}}, or further arguments to be passed to 
+#' \code{\link[graphics]{plot}}.
+#' 
+#' @return 
+#' \code{lientz} returns an object of class \code{c("lientz", "function")}; 
+#' this is a function with additional attributes:
+#' \itemize{
+#'   \item{x}{ the \code{x} argument}
+#'   \item{bw}{ the \code{bw} argument }
+#'   \item{call}{ the call which produced the result }
+#' }
+#' 
+#' \code{mlv.lientz} returns a numeric value, the mode estimate. 
+#' If \code{abc = TRUE}, the \code{x} value minimizing the Lientz empirical 
+#' function is returned. Otherwise, the \code{\link[stats]{optim}} method is 
+#' used to perform minimization, and the attributes: 'value', 'counts', 
+#' 'convergence' and 'message', coming from the \code{\link[stats]{optim}} 
+#' method, are added to the result.
+#' 
+#' @seealso 
+#' \code{\link[modeest]{mlv}} for general mode estimation; 
+#' \code{\link[modeest]{shorth}} for the shorth estimate of the mode
+#' 
+#' @export
+#' @aliases Lientz
+#' 
+#' @examples 
+#' # Unimodal distribution
+#' x <- rbeta(1000,23,4)
+#' 
+#' ## True mode
+#' betaMode(23, 4)
+#' 
+#' ## Lientz object
+#' f <- lientz(x, 0.2)
+#' print(f)
+#' plot(f)
+#' 
+#' ## Estimate of the mode
+#' mlv(f)              # optim(shorth(x), fn = f)
+#' mlv(f, abc = TRUE)  # x[which.min(f(x))]
+#' mlv(x, method = "lientz", bw = 0.2)
+#' 
+#' # Bimodal distribution
+#' x <- c(rnorm(1000,5,1), rnorm(1500, 22, 3))
+#' f <- lientz(x, 0.1)
+#' plot(f)
+#' 
 lientz <-
-function(x,         # sample (the data)
-         bw = NULL) # corresponds to parameter 'beta' in Lientz (1970)
+function(x,
+         bw = NULL)
 {
-#############################
-# Empirical Lientz's function
-#############################
-
   if (bw <= 0 | bw >= 1) stop("argument 'bw' must belong to (0, 1)")
   
   y <- sort(x)
@@ -43,16 +144,14 @@ function(x,         # sample (the data)
   attr(f, "x") <- x
   attr(f, "bw") <- bw
   attr(f, "source") <- NULL
-  
-  ## Output
-  return(f)
-  
+  f
 }
 
 
-#Lientz <- lientz
-
-
+#' @importFrom graphics plot points legend locator
+#' @export
+#' @rdname lientz
+#' 
 plot.lientz <-
 function(x,            # an object of class 'lientz'
          zoom = FALSE, # if TRUE, one can zoom on the graph created
@@ -68,7 +167,6 @@ function(x,            # an object of class 'lientz'
   xlab <- arg$xlab
   ylab <- arg$ylab
 
-
   xx <- attr(x, "x")
   bw <- attr(x, "bw") 
   
@@ -82,25 +180,28 @@ function(x,            # an object of class 'lientz'
   if (is.null(xlab)) xlab <- "x"
   if (is.null(ylab)) ylab <- "Sn(x)"
     
-  plot.default(z, lz, main = main, xlab = xlab, ylab = ylab, ylim = ylim, ...)
-  points.default(xx, rep(ylim[1],length(xx)), pch = "'", col = 4)
-  legend("topleft",legend = c("Regular grid", "x"), col = c(1,4), pch = 19, bg = "white")
+  graphics::plot(z, lz, main = main, xlab = xlab, ylab = ylab, ylim = ylim, ...)
+  graphics::points(xx, rep(ylim[1],length(xx)), pch = "'", col = 4)
+  graphics::legend("topleft",legend = c("Regular grid", "x"), col = c(1,4), pch = 19, bg = "white")
   
   if (zoom) {
     cat("you can zoom on the graph (press 'Esc' to escape)\n")  
-    lc <- locator(2)
+    lc <- graphics::locator(2)
     while (!is.null(lc)) {
       xlim <- sort(c(lc$x[1], lc$x[2]))
       ylim <- sort(c(lc$y[1], lc$y[2]))
       plot.lientz(x, zoom = FALSE, main = main, xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, ...)
-      lc <- locator(2)
+      lc <- graphics::locator(2)
     }  
   }
-  
-  return(invisible(NULL))
+  invisible(NULL)
 }
 
 
+#' @export
+#' @rdname lientz
+#' @method print lientz
+#' 
 print.lientz <-
 function(x,             # an object of class 'lientz'
          digits = NULL,
@@ -118,6 +219,10 @@ function(x,             # an object of class 'lientz'
 }
 
 
+#' @importFrom stats optim
+#' @export
+#' @rdname lientz
+#' 
 mlv.lientz <-
 function(x,                       # sample (the data) or object of class 'lientz'
          bw = NULL,               # bandwidth
@@ -126,10 +231,6 @@ function(x,                       # sample (the data) or object of class 'lientz
          optim.method = "BFGS",   # method used in 'optim'
          ...)
 {
-#########################
-# Lientz's mode estimator
-#########################
-
   ## Initialization
   if (!inherits(x, "lientz")) {
     Sn <- lientz(x, bw)
@@ -139,7 +240,7 @@ function(x,                       # sample (the data) or object of class 'lientz
   }
     
   if (!abc) {
-    mini <- optim(par, fn = Sn, method = optim.method, control=list(fnscale=1),...)
+    mini <- stats::optim(par, fn = Sn, method = optim.method, control=list(fnscale=1),...)
     M <- mini$par
     attr(M, "value") <- mini$value
     attr(M, "counts") <- mini$counts
@@ -149,7 +250,5 @@ function(x,                       # sample (the data) or object of class 'lientz
     Sn <- Sn(x)
     M <- mean(x[Sn == min(Sn)])
   }
-    
-  ## Output
-  return(M)
+  M
 }

@@ -7,25 +7,13 @@
 Mode Estimation 
 }
 \description{
-This package intends to provide estimators of the mode of univariate 
-unimodal (and sometimes multimodal) data and values of the modes of usual probability distributions. 
+This package provides estimators of the mode of univariate 
+unimodal (and sometimes multimodal) data, and values of the modes of usual probability distributions. 
 %It also includes computation of the density function, distribution function, and quantile 
 %function of the Chernoff distribution, which is the limiting distribution of the
 %Chernoff mode estimator.
 
 For a complete list of functions, use \code{library(help = "modeest")} or \code{help.start()}.
-}
-\details{
-\tabular{ll}{
-Package: \tab modeest\cr
-Type: \tab Package\cr
-Version: \tab 2.2\cr
-Date: \tab 2014-07-12\cr
-License: \tab GPL version 3 or newer\cr
-}
-}
-\author{
-P. Poncet 
 }
 \references{
   \itemize{
@@ -232,9 +220,9 @@ P. Poncet
   }
 } 
 
-\keyword{ distribution  }
+\keyword{ distribution }
 \keyword{ univar }
 \keyword{ robust }
 \keyword{ nonparametric }
-\seealso{ \code{\link{mlv}} for general mode estimation%;
+\seealso{ \code{\link[modeest]{mlv}} for general mode estimation. 
 }

@@ -1,10 +1,59 @@
-# Author : P. Poncet
-#! regarder la fonction na.contiguous, je crois qu'elle fait exactement ce qu'il faut...
+#' @title 
+#' The Asselin de Beauville mode estimator
+#' 
+#' @description 
+#' This mode estimator is based on the algorithm 
+#' described in Asselin de Beauville (1978).
+#' 
+#' @note 
+#' The user should preferentially call \code{asselin} through 
+#' \code{mlv(x, method = "asselin", ...)}. 
+#' 
+#' @references 
+#' \itemize{
+#'   \item Asselin de Beauville J.-P. (1978). 
+#'   Estimation non parametrique de la densite et du mode, 
+#'   exemple de la distribution Gamma. 
+#'   \emph{Revue de Statistique Appliquee}, \bold{26}(3):47-70.
+#' }
+#' 
+#' @param x 
+#' numeric. Vector of observations. 
+#' 
+#' @param bw
+#' numeric. A number in \code{(0, 1]}. 
+#' If \code{bw = 1}, the selected 'modal chain' may be too long. 
+#' 
+#' @param ... 
+#' further arguments to be passed to the \code{\link[stats]{quantile}} function.
+#' 
+#' @return 
+#' A numeric value is returned, the mode estimate.
+#' 
+#' @seealso 
+#' \code{\link[modeest]{mlv}} for general mode estimation. 
+#' 
+#' @importFrom stats median quantile
+#' @export
+#' @aliases Asselin
+#' 
+#' @examples 
+#' x <- rbeta(1000, shape1 = 2, shape2 = 5)
+#' 
+#' ## True mode:
+#' betaMode(shape1 = 2, shape2 = 5)
+#' 
+#' ## Estimation:
+#' asselin(x, bw = 1)
+#' asselin(x, bw = 1/2)
+#' mlv(x, method = "asselin")
+#' 
 asselin <-
 function(x,
-         bw = NULL, # bw = 1 donne une chaine modale longue, bw < 1 est plus sévère 
+         bw = NULL, # bw = 1 donne une chaine modale longue, bw < 1 est plus severe 
          ...)
 {
+# TODO: look at 'na.contiguous' 
 
   if (is.null(bw)) bw <- 1
   
@@ -20,7 +69,8 @@ function(x,
     ny <- length(y)
     if (ny==1) return(y)
 
-    qy <- quantile(y, probs = c(0.1, 0.25, 0.5, 0.75, 0.9), names = FALSE, ...)
+    qy <- stats::quantile(y, probs = c(0.1, 0.25, 0.5, 0.75, 0.9), 
+                          names = FALSE, ...)
     delta <- min(qy[5] - qy[4], qy[2] - qy[1])
 
     a <- qy[1] - 3*delta
@@ -109,7 +159,5 @@ function(x,
     }
   
   }
-  
-  return(median(y))
-  
+  stats::median(y)
 }

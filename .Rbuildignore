@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^\.gitignore$
 ^\.travis.yml$
+inst/bib
+TODO
