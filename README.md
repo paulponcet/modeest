@@ -9,7 +9,7 @@ distributions.
 
 ## Installation
 
-You can install the *release* version of `modeest` from the [CRAN](http://cran.r-project.org/web/packages/modeest/) with: 
+You can install the *release* version of `modeest` from the [CRAN](https://CRAN.R-project.org/package=modeest) with: 
 
 ```R
 install.packages("modeest")

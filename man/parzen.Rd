@@ -5,8 +5,8 @@
 \alias{Parzen}
 \title{Parzen's Kernel mode estimator}
 \usage{
-parzen(x, bw = NULL, kernel = "gaussian", abc = FALSE, par = shorth(x),
-  optim.method = "BFGS", ...)
+parzen(x, bw = NULL, kernel = "gaussian", abc = FALSE,
+  par = shorth(x), optim.method = "BFGS", ...)
 }
 \arguments{
 \item{x}{numeric. Vector of observations.}
