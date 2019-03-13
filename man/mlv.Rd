@@ -13,11 +13,11 @@
 \usage{
 mlv(x, ...)
 
-\method{mlv}{character}(x, ...)
+\method{mlv}{character}(x, na.rm = FALSE, ...)
 
-\method{mlv}{factor}(x, ...)
+\method{mlv}{factor}(x, na.rm = FALSE, ...)
 
-\method{mlv}{logical}(x, ...)
+\method{mlv}{logical}(x, na.rm = FALSE, ...)
 
 \method{mlv}{integer}(x, na.rm = FALSE, ...)
 
@@ -28,11 +28,9 @@ mlv(x, ...)
 mlv1(x, ...)
 }
 \arguments{
-\item{x}{numeric (vector of observations), or an object of class \code{"factor"}, \code{"integer"}, etc. 
-For the function \code{as.numeric}, an object of class \code{"mlv"}.}
+\item{x}{numeric (vector of observations), or an object of class \code{"factor"}, \code{"integer"}, etc.}
 
-\item{...}{Further arguments to be passed to the function called for computation; 
-this function is related to the \code{method} argument.}
+\item{...}{Further arguments to be passed to the function called for computation.}
 
 \item{na.rm}{logical. Should missing values be removed?}
 
@@ -71,24 +69,29 @@ Different estimates (or methods) are provided:
 \code{mlv} can also be used to compute the mode of a given distribution, with \code{mlv.character}.
 }
 \details{
-For the function \code{mlv.default}, available methods are 
-\code{"mfv"}, \code{"lientz"}, \code{"naive"}, \code{"venter"}, 
+For the default method of \code{mlv}, available methods are \code{"lientz"}, 
+\code{"naive"}, \code{"venter"}, 
 \code{"grenander"}, \code{"hsm"}, \code{"hrm"}, \code{"parzen"}, 
-\code{"tsybakov"}, and \code{"asselin"}. 
+\code{"tsybakov"}, \code{"asselin"}, and \code{"meanshift"}. 
 See the description above and the associated links. 
 
-If \code{x} is of class \code{"factor"} or \code{"integer"}, 
-the most frequent value found in \code{x} is returned. 
+If \code{x} is of class \code{"character"} (with length > 1), 
+\code{"factor"}, or \code{"integer"}, then the most frequent value found in 
+\code{x} is returned using \code{\link[statip]{mfv}} from package 
+\pkg{statip}. 
 
-If \code{x} is of class \code{"character"}, 
+If \code{x} is of class \code{"character"} (with length 1), 
 \code{x} should be one of \code{"beta"}, \code{"cauchy"}, \code{"gev"}, etc. 
 i.e. a character for which a function \code{*Mode} exists 
 (for instance \code{betaMode}, \code{cauchyMode}, etc.). 
 See \code{\link[modeest]{distrMode}} for the available functions. 
 The mode of the corresponding distribution is returned. 
 
-If \code{x} is of class \code{"density"}, the value where the density is maximised is returned. 
-For the S3 function \code{mlv.lientz}, see \code{\link[modeest]{Lientz}} for more details.
+If \code{x} is of class \code{"density"}, the value where the density is 
+maximised is returned. 
+
+If \code{x} is of class \code{mlv.lientz}, see \code{\link[modeest]{Lientz}} 
+for more details.
 }
 \examples{
 # Unimodal distribution
@@ -99,11 +102,19 @@ betaMode(23, 4)
 # or
 mlv("beta", 23, 4)
 
+## Be aware of this behaviour: 
+mlv("norm") # returns 0, the mode of the standard normal distribution
+mlv("normal") # returns 0 again, since "normal" is matched with "norm"
+mlv("abnormal") # returns "abnormal", since the input vector "abrnormal" 
+# is not recognized as a distribution name, hence is taken as a character 
+# vector from which the most frequent value is requested. 
+
 ## Estimate of the mode
 mlv(x, method = "lientz", bw = 0.2)
 mlv(x, method = "naive", bw = 1/3)
 mlv(x, method = "venter", type = "shorth")
 mlv(x, method = "grenander", p = 4)
+mlv(x, method = "hrm", bw = 0.3)
 mlv(x, method = "hsm")
 mlv(x, method = "parzen", kernel = "gaussian")
 mlv(x, method = "tsybakov", kernel = "gaussian")
@@ -116,14 +127,15 @@ mlv(x, method = "meanshift")
 See the references on mode estimation on the \code{\link[modeest]{modeest-package}}'s page.
 }
 \seealso{
-\code{\link[modeest]{mfv}}, 
-\code{\link[modeest]{Lientz}}, 
-\code{\link[modeest]{naive}}, 
+\code{\link[statip]{mfv}}, 
+\code{\link[modeest]{parzen}}, 
 \code{\link[modeest]{venter}}, 
+\code{\link[modeest]{meanshift}},
 \code{\link[modeest]{grenander}}, 
 \code{\link[modeest]{hrm}}, 
 \code{\link[modeest]{hsm}}, 
-\code{\link[modeest]{parzen}}, 
+\code{\link[modeest]{lientz}}, 
+\code{\link[modeest]{naive}}, 
 \code{\link[modeest]{tsybakov}}, 
 \code{\link[modeest]{skewness}}
 }

@@ -1,23 +1,33 @@
 #' @title 
 #' The Venter / Dalenius / LMS mode estimator
 #' 
-#' @description 
+#' @description
 #' This function computes the Venter mode estimator, also called the Dalenius, 
 #' or LMS (Least Median Square) mode estimator. 
 #' 
 #' @details 
-#' The modal interval, i.e. the shortest interval among intervals containing \code{k+1} observations, is first computed.
+#' The modal interval, i.e. the shortest interval among intervals containing 
+#' \code{k+1} observations, is first computed. (In dimension > 1, this question 
+#' is known as a 'k-enclosing problem'.)
 #' The user should either give the bandwidth \code{bw} or the argument \code{k}, 
-#' \code{k} being taken equal to \code{ceiling(bw*n) - 1} if missing. \cr
+#' \code{k} being taken equal to \code{ceiling(bw*n) - 1} if missing, so 
+#' \code{bw} can be seen as the fraction of the observations to be considered 
+#' for the shortest interval. 
+#' 
 #' If \code{type = 1}, the midpoint of the modal interval is returned.
-#' If \code{type = 2}, the \code{floor((k+1)/2)}th element of the modal interval is returned.
-#' If \code{type = 3} or \code{type = "dalenius"}, the median of the modal interval is returned.
-#' If \code{type = 4} or \code{type = "shorth"}, the mean of the modal interval is returned.
-#' If \code{type = 5} or \code{type = "ekblom"}, Ekblom's \eqn{L_{-\infty}}{L_{-infinity}} estimate is returned, see Ekblom (1972). 
-#' If \code{type = 6} or \code{type = "hsm"}, the half sample mode (hsm) is computed, see \code{\link{hsm}}.
+#' If \code{type = 2}, the \code{floor((k+1)/2)}th element of the modal 
+#' interval is returned.
+#' If \code{type = 3} or \code{type = "dalenius"}, the median of the modal 
+#' interval is returned.
+#' If \code{type = 4} or \code{type = "shorth"}, the mean of the modal interval 
+#' is returned.
+#' If \code{type = 5} or \code{type = "ekblom"}, Ekblom's 
+#' \eqn{L_{-\infty}}{L_{-infinity}} estimate is returned, see Ekblom (1972). 
+#' If \code{type = 6} or \code{type = "hsm"}, the half sample mode (hsm) is 
+#' computed, see \code{\link{hsm}}.
 #' 
 #' @note 
-#' The user should preferentially call \code{venter} through 
+#' The user may call \code{venter} through 
 #' \code{mlv(x, method = "venter", ...)}. 
 #' 
 #' @references 
@@ -60,7 +70,11 @@
 #' character. The action to take if a tie is encountered.
 #' 
 #' @param tie.limit
-#' numeric. A limit deciding whether or not a warning is given when a tie is encountered.
+#' numeric. A limit deciding whether or not a warning is given when a tie is 
+#' encountered.
+#' 
+#' @param warn
+#' logical. If \code{TRUE}, a warning is thrown when a tie is encountered. 
 #' 
 #' @param ...
 #' Further arguments.
@@ -90,13 +104,14 @@
 #' mlv(x, method = "venter", bw = 1/3)
 #' 
 venter <-
-function(x,                  # sample (the data)
-         bw = NULL,          # 'lms' parametrization : fraction of the observations to be considered for the shortest interval
-         k,                  # length of the intervals
-         iter = 1,           # number of iterations
-         type = 1,           # -Inf, 1, 2, 3, 4, 5, 6, "-Inf", "1", "2", "3", "dalenius", "4", "shorth", "5", "ekblom", "6", "hsm"
+function(x,
+         bw = NULL, 
+         k,
+         iter = 1,
+         type = 1,
          tie.action = "mean",
-         tie.limit = 0.05)
+         tie.limit = 0.05, 
+         warn = FALSE)
 {
 
   ny <- length(x)
@@ -106,14 +121,14 @@ function(x,                  # sample (the data)
                     c("-inf", "1", "2", "3", "dalenius", "4", "shorth", "5", "ekblom", "6", "hsm"))
   if (type == "3") type <- "dalenius"
   if (type == "4") type <- "shorth"
-  if (type == "-Inf" | type == "5") type <- "ekblom"
+  if (type == "-Inf" || type == "5") type <- "ekblom"
   if (type == "6") type <- "hsm"
   
   if (type == "hsm") return(hsm(x = x, bw = bw, k = k, tie.action = tie.action, 
                                 tie.limit = tie.limit))
   
-  if (missing(k) & !is.null(bw)) {
-    if (bw <= 0 | bw > 1) stop("argument 'bw' must belong to (0, 1]")
+  if (missing(k) && !is.null(bw)) {
+    if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]")
     k <- ceiling(bw*ny) - 1
   } else if (missing(k) & is.null(bw)) {
     if (type == "ekblom") {
@@ -123,7 +138,7 @@ function(x,                  # sample (the data)
     }
   }
     
-  if (k < 0 | k >= ny) stop("argument 'k' must belong to [0, length('x'))") 
+  if (k < 0 || k >= ny) stop("argument 'k' must belong to [0, length('x'))") 
   
   y <- sort(x)
 
@@ -133,7 +148,7 @@ function(x,                  # sample (the data)
   i <- which(diffs==min(diffs))
   
   ## Ties?
-  if (length(i) > 1) i <- .deal.ties(ny, i, tie.action, tie.limit)
+  if (length(i) > 1) i <- .deal.ties(ny, i, tie.action, tie.limit, warn = warn)
   
   ## Output
   M <- switch(type,

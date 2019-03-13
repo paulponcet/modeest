@@ -18,7 +18,7 @@
 #' then \code{k = ceiling(bw(n)) - 1} instead.
 #' 
 #' @note 
-#' The user should preferentially call \code{hsm} through 
+#' The user may call \code{hsm} through 
 #' \code{mlv(x, method = "hsm", ...)}. 
 #' 
 #' @references 
@@ -87,14 +87,14 @@ function(x,
          tie.limit = 0.05,
          ...)
 {
-  if (!missing(k) & is.null(bw)) {
+  if (!missing(k) && is.null(bw)) {
     bw <- (k+1)/length(x)
-  } else if (missing(k) & is.null(bw)) {
+  } else if (missing(k) && is.null(bw)) {
     bw <- 1/2
   }
 
   if (is.numeric(bw)) {
-    if (bw <= 0 | bw > 1) stop("argument 'bw' must belong to (0, 1]")
+    if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]")
   }
   
   y <- sort(x)

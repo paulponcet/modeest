@@ -1,7 +1,5 @@
 
-#! a voir : packages 'ks' et 'kedd', notamment pour les kernel density derivative estimates
-
-# Computes an estimate of the mode of a univariate (unimodal ?) distribution
+# TODO: packages 'ks' et 'kedd', notamment pour les kernel density derivative estimates
 
 #' @title 
 #' Estimation of the Mode(s) or Most Likely Value(s)
@@ -27,31 +25,35 @@
 #' \code{mlv} can also be used to compute the mode of a given distribution, with \code{mlv.character}.
 #' 
 #' @details 
-#' For the function \code{mlv.default}, available methods are 
-#' \code{"mfv"}, \code{"lientz"}, \code{"naive"}, \code{"venter"}, 
+#' For the default method of \code{mlv}, available methods are \code{"lientz"}, 
+#' \code{"naive"}, \code{"venter"}, 
 #' \code{"grenander"}, \code{"hsm"}, \code{"hrm"}, \code{"parzen"}, 
-#' \code{"tsybakov"}, and \code{"asselin"}. 
+#' \code{"tsybakov"}, \code{"asselin"}, and \code{"meanshift"}. 
 #' See the description above and the associated links. 
 #' 
-#' If \code{x} is of class \code{"factor"} or \code{"integer"}, 
-#' the most frequent value found in \code{x} is returned. 
+#' If \code{x} is of class \code{"character"} (with length > 1), 
+#' \code{"factor"}, or \code{"integer"}, then the most frequent value found in 
+#' \code{x} is returned using \code{\link[statip]{mfv}} from package 
+#' \pkg{statip}. 
 #' 
-#' If \code{x} is of class \code{"character"}, 
+#' If \code{x} is of class \code{"character"} (with length 1), 
 #' \code{x} should be one of \code{"beta"}, \code{"cauchy"}, \code{"gev"}, etc. 
 #' i.e. a character for which a function \code{*Mode} exists 
 #' (for instance \code{betaMode}, \code{cauchyMode}, etc.). 
 #' See \code{\link[modeest]{distrMode}} for the available functions. 
 #' The mode of the corresponding distribution is returned. 
 #' 
-#' If \code{x} is of class \code{"density"}, the value where the density is maximised is returned. 
-#' For the S3 function \code{mlv.lientz}, see \code{\link[modeest]{Lientz}} for more details. 
+#' If \code{x} is of class \code{"density"}, the value where the density is 
+#' maximised is returned. 
+#' 
+#' If \code{x} is of class \code{mlv.lientz}, see \code{\link[modeest]{Lientz}} 
+#' for more details. 
 #' 
 #' @references 
 #' See the references on mode estimation on the \code{\link[modeest]{modeest-package}}'s page. 
 #' 
 #' @param x
 #' numeric (vector of observations), or an object of class \code{"factor"}, \code{"integer"}, etc. 
-#' For the function \code{as.numeric}, an object of class \code{"mlv"}. 
 #' 
 #' @param bw
 #' numeric. The bandwidth to be used. 
@@ -71,22 +73,22 @@
 #' is maximised using \code{\link{optim}}. 
 #' 
 #' @param ...
-#' Further arguments to be passed to the function called for computation; 
-#' this function is related to the \code{method} argument. 
+#' Further arguments to be passed to the function called for computation. 
 #' 
 #' @return 
 #' A vector of the same type as \code{x}. 
 #' Be aware that the length of this vector can be \code{> 1}. 
 #' 
 #' @seealso 
-#' \code{\link[modeest]{mfv}}, 
-#' \code{\link[modeest]{Lientz}}, 
-#' \code{\link[modeest]{naive}}, 
+#' \code{\link[statip]{mfv}}, 
+#' \code{\link[modeest]{parzen}}, 
 #' \code{\link[modeest]{venter}}, 
+#' \code{\link[modeest]{meanshift}},
 #' \code{\link[modeest]{grenander}}, 
 #' \code{\link[modeest]{hrm}}, 
 #' \code{\link[modeest]{hsm}}, 
-#' \code{\link[modeest]{parzen}}, 
+#' \code{\link[modeest]{lientz}}, 
+#' \code{\link[modeest]{naive}}, 
 #' \code{\link[modeest]{tsybakov}}, 
 #' \code{\link[modeest]{skewness}}
 #' 
@@ -101,12 +103,19 @@
 #' # or
 #' mlv("beta", 23, 4)
 #' 
+#' ## Be aware of this behaviour: 
+#' mlv("norm") # returns 0, the mode of the standard normal distribution
+#' mlv("normal") # returns 0 again, since "normal" is matched with "norm"
+#' mlv("abnormal") # returns "abnormal", since the input vector "abrnormal" 
+#' # is not recognized as a distribution name, hence is taken as a character 
+#' # vector from which the most frequent value is requested. 
+#' 
 #' ## Estimate of the mode
 #' mlv(x, method = "lientz", bw = 0.2)
 #' mlv(x, method = "naive", bw = 1/3)
 #' mlv(x, method = "venter", type = "shorth")
 #' mlv(x, method = "grenander", p = 4)
-# #' mlv(x, method = "hrm", bw = 0.3)
+#' mlv(x, method = "hrm", bw = 0.3)
 #' mlv(x, method = "hsm")
 #' mlv(x, method = "parzen", kernel = "gaussian")
 #' mlv(x, method = "tsybakov", kernel = "gaussian")
@@ -128,13 +137,14 @@ function(x,
 #' 
 mlv.character <- 
 function(x, 
+         na.rm = FALSE,
          ...)
 {
   stopifnot(is.character(x))
   if (length(x)==1L && statip::name2distr(x) %in% .distributionsList()) {
     distrMode(x, ...)
   } else {
-    mfv(x, ...)
+    mfv(x, na.rm = na.rm)
   }
 }
 
@@ -144,10 +154,11 @@ function(x,
 #' 
 mlv.factor <-
 function(x,
+         na.rm = FALSE,
          ...)
 {
   stopifnot(is.factor(x))
-  mfv(x, ...)
+  mfv(x, na.rm = na.rm)
 }
 
 
@@ -156,10 +167,11 @@ function(x,
 #' 
 mlv.logical <-
 function(x,
+         na.rm = FALSE,
          ...)
 {
   stopifnot(is.logical(x))
-  mfv(x, ...)
+  mfv(x, na.rm = na.rm)
 }
 
 
@@ -172,11 +184,11 @@ function(x,
          ...)
 {
   stopifnot(is.integer(x))
-  mfv(x, ...)
+  mfv(x, na.rm = na.rm)
 }
 
 
-#' @importFrom bazar is.wholenumber
+# #' @importFrom bazar is.wholenumber
 #' @export
 #' @rdname mlv
 #' 
@@ -191,9 +203,10 @@ function(x,
   stopifnot(is.numeric(x))
   x <- as.vector(x)
 
-  if (bazar::is.wholenumber(x)) {
-    return(mfv(as.integer(round(x)), na.rm = na.rm))
-  }
+  #test <- bazar::is.wholenumber(x)
+  #if (is.na(test) || test) {
+  #  return(mfv(as.integer(round(x)), na.rm = na.rm))
+  #}
   
   x.na <- is.na(x)
   if (any(x.na)) {
@@ -213,14 +226,16 @@ function(x,
     warning("argument 'method' is missing. Data are supposed to be continuous. 
             Default method 'shorth' is used")
     method <- "shorth"
+  #} else if (tolower(method) == "mfv") {
+  #  stop("incorrect 'method' argument")
   } else if (pmatch(tolower(method), c("density", "kernel"), nomatch = 0)) {
     method <- "parzen"
   } else method <- match.arg(tolower(method), .methodsList())
   
   if (method == "lientz") method <- "mlv.lientz"
   
-  theta <- do.call(method, list(x = x, bw = bw, ...))
-  mean(theta)
+  do.call(method, list(x = x, bw = bw, ...)) # possibly length > 1
+  #mean(theta)
 }
 
 
@@ -240,6 +255,28 @@ function(x,
   y <- x$y
   x <- x$x
 
+  den.s <- stats::smooth.spline(x, y, all.knots=TRUE, spar=spar)
+  s.1 <- stats::predict(den.s, den.s$x, deriv = 1)
+  s.0 <- stats::predict(den.s, den.s$x, deriv = 0)
+  
+  den.sign <- sign(s.1$y)
+  b <- rle(den.sign)$values
+  nmodes <- length(b)/2
+  #if (nmodes > 10) { nmodes <- 10 }
+  if (is.na(nmodes)) { nmodes <- 0 }
+  
+  a <- c(1,1+which(diff(den.sign)!=0))
+  df <- data.frame(a,b)
+  df <- df[which(df$b %in% -1),]
+  modes <- s.1$x[df$a]
+  density <- s.0$y[df$a]
+  df2 <- data.frame(modes,density)
+  df2 <- df2[with(df2, order(-density)), ] # ordered by density
+  df2
+  
+  
+#-------------------  
+  
   idx <- y == max(y)
   M <- x[idx]
 
@@ -247,7 +284,7 @@ function(x,
     yy <- c(0, y, 0)
     ny <- length(yy)
     idx <- (yy[2:(ny - 1)] > yy[1:(ny - 2)]) & (yy[2:(ny - 1)] > yy[3:ny])
-    M <- unique(x[idx], M)
+    M <- unique(c(x[idx], M))
   }
    
   M

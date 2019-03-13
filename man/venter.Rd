@@ -7,7 +7,7 @@
 \title{The Venter / Dalenius / LMS mode estimator}
 \usage{
 venter(x, bw = NULL, k, iter = 1, type = 1, tie.action = "mean",
-  tie.limit = 0.05)
+  tie.limit = 0.05, warn = FALSE)
 
 shorth(x, ...)
 }
@@ -24,7 +24,10 @@ shorth(x, ...)
 
 \item{tie.action}{character. The action to take if a tie is encountered.}
 
-\item{tie.limit}{numeric. A limit deciding whether or not a warning is given when a tie is encountered.}
+\item{tie.limit}{numeric. A limit deciding whether or not a warning is given when a tie is 
+encountered.}
+
+\item{warn}{logical. If \code{TRUE}, a warning is thrown when a tie is encountered.}
 
 \item{...}{Further arguments.}
 }
@@ -36,18 +39,28 @@ This function computes the Venter mode estimator, also called the Dalenius,
 or LMS (Least Median Square) mode estimator.
 }
 \details{
-The modal interval, i.e. the shortest interval among intervals containing \code{k+1} observations, is first computed.
+The modal interval, i.e. the shortest interval among intervals containing 
+\code{k+1} observations, is first computed. (In dimension > 1, this question 
+is known as a 'k-enclosing problem'.)
 The user should either give the bandwidth \code{bw} or the argument \code{k}, 
-\code{k} being taken equal to \code{ceiling(bw*n) - 1} if missing. \cr
+\code{k} being taken equal to \code{ceiling(bw*n) - 1} if missing, so 
+\code{bw} can be seen as the fraction of the observations to be considered 
+for the shortest interval. 
+
 If \code{type = 1}, the midpoint of the modal interval is returned.
-If \code{type = 2}, the \code{floor((k+1)/2)}th element of the modal interval is returned.
-If \code{type = 3} or \code{type = "dalenius"}, the median of the modal interval is returned.
-If \code{type = 4} or \code{type = "shorth"}, the mean of the modal interval is returned.
-If \code{type = 5} or \code{type = "ekblom"}, Ekblom's \eqn{L_{-\infty}}{L_{-infinity}} estimate is returned, see Ekblom (1972). 
-If \code{type = 6} or \code{type = "hsm"}, the half sample mode (hsm) is computed, see \code{\link{hsm}}.
+If \code{type = 2}, the \code{floor((k+1)/2)}th element of the modal 
+interval is returned.
+If \code{type = 3} or \code{type = "dalenius"}, the median of the modal 
+interval is returned.
+If \code{type = 4} or \code{type = "shorth"}, the mean of the modal interval 
+is returned.
+If \code{type = 5} or \code{type = "ekblom"}, Ekblom's 
+\eqn{L_{-\infty}}{L_{-infinity}} estimate is returned, see Ekblom (1972). 
+If \code{type = 6} or \code{type = "hsm"}, the half sample mode (hsm) is 
+computed, see \code{\link{hsm}}.
 }
 \note{
-The user should preferentially call \code{venter} through 
+The user may call \code{venter} through 
 \code{mlv(x, method = "venter", ...)}.
 }
 \examples{

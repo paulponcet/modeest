@@ -9,7 +9,7 @@
 #' If \code{kernel = "uniform"}, the \code{\link[modeest]{naive}} mode estimate is returned.
 #' 
 #' @note 
-#' The user should preferentially call \code{parzen} through 
+#' The user may call \code{parzen} through 
 #' \code{mlv(x, method = "kernel", ...)} or \code{mlv(x, method = "parzen", ...)}. 
 #' 
 #' Presently, \code{parzen} is quite slow.
@@ -52,21 +52,15 @@
 #' numeric. The smoothing bandwidth to be used. 
 #' 
 #' @param kernel
-#' character. The kernel to be used. Available kernels are 
-#' \code{"biweight"}, \code{"cosine"}, \code{"eddy"}, \code{"epanechnikov"}, 
-#' \code{"gaussian"}, \code{"optcosine"}, \code{"rectangular"}, 
-#' \code{"triangular"}, \code{"uniform"}. 
-#' See \code{\link[stats]{density}} for more details on some of these kernels.
+#' character. The kernel to be used. For available kernels see 
+#' \code{\link[statip]{densityfun}} in package \pkg{statip}.
 #' 
 #' @param abc
 #' logical. If \code{FALSE} (the default), the kernel density estimate 
 #' is maximised using \code{\link[stats]{optim}}. 
 #' 
-#' @param par
-#' numeric. The initial value used in \code{\link[stats]{optim}}.
-#' 
-#' @param optim.method
-#' character. If \code{abc = FALSE}, the method used in \code{\link[stats]{optim}}.
+#' @param tolerance
+#' numeric. Desired accuracy in the \code{\link[stats]{optimize}} function.
 #' 
 #' @param ... 
 #' If \code{abc = FALSE}, further arguments to be passed to \code{\link[stats]{optim}}. 
@@ -82,7 +76,7 @@
 #' @seealso 
 #' \code{\link[modeest]{mlv}}, \code{\link[modeest]{naive}}
 #' 
-#' @importFrom stats ecdf optim bw.SJ bw.nrd0 bw.nrd bw.ucv bw.bcv
+#' @importFrom stats optimize bw.SJ bw.nrd0 bw.nrd bw.ucv bw.bcv
 #' @importFrom statip kernelfun
 #' @importFrom statip .kernelsList
 #' @export
@@ -99,77 +93,26 @@
 #' mlv(x, method = "kernel", kernel = "gaussian", bw = 0.3, par = shorth(x)) 
 #' 
 parzen <-
-function(x,                       # sample (the data)
-         bw = NULL,               # bandwidth
-         kernel = "gaussian",     # kernel used
-         abc = FALSE,             # if FALSE, 'optim' is used
-         par = shorth(x),         # initial value used in 'optim'
-         optim.method = "BFGS",   # method used in 'optim'
+function(x,
+         bw = NULL,
+         kernel = "gaussian",
+         abc = FALSE,
+         tolerance = .Machine$double.eps^0.25,
          ...)
 {
 
   if (pmatch(tolower(kernel), "normal", nomatch = 0)) {
     kernel <- "gaussian"
-  } else {
-    kernel <- match.arg(tolower(kernel), c(statip::.kernelsList(), "uniform"))
   }
 
-  if (kernel == "uniform") {
-    if (is.null(bw)) bw <- 1/2
-    if (bw <= 0 | bw >= 1) stop("argument 'bw' must belong to (0, 1)")    
-    Fn <- stats::ecdf(x)
-    fn <- Fn(x+bw) - Fn(x-bw) # the estimate of the density is (Fn(x+bw) - Fn(x-bw))/(2*bw)
-    ## Remark : optimization fails since fn is not regular enough
-    ## (any point is viewed as a local maxima). The following is the only solution:
-    M <- x[fn == max(fn)]
-    #! problem: possibly length(M) > 1 !!
+  if (is.null(bw)) bw <- "nrd0"
+  f <- statip::densityfun(x, bw = bw, kernel = kernel, ...)
   
-  } else {  
-    
-    ## Initialization
-    nx <- length(x)
-    if (is.null(bw)) bw <- "nrd0"
-    if (is.character(bw)) {
-      if (nx < 2)
-        stop("need at least 2 points to select a bandwidth automatically")
-      bw <- switch(tolower(bw), 
-                   nrd0 = stats::bw.nrd0(x), nrd = bw.nrd(x), 
-                   ucv = bw.ucv(x), 
-                   bcv = stats::bw.bcv(x), 
-                   sj = , 
-                   `sj-ste` = stats::bw.SJ(x, method = "ste"), 
-                   `sj-dpi` = stats::bw.SJ(x, method = "dpi"), 
-                   stop("unknown bandwidth rule"))
-    }
-   
-    fn <- 
-    function(z)
-    {
-      mat <- z/bw - x/bw
-      k <- statip::kernelfun(kernel)(mat)
-      return(sum(k))
-    }
-    
-    #FN <- 
-    #function(z)
-    #{
-    #  mat <- kronecker(z/bw, t(-x/bw), FUN = "+")
-    #  k <- do.call(paste(".kernel.", kernel, sep = ""), list(mat))$k
-    #  return(rowSums(k))
-    #}
-  
-    if (!abc) {
-      maxi <- stats::optim(par, fn, method = optim.method, control=list(fnscale=-1), ...)
-      M <- maxi$par
-      attr(M, "value") <- maxi$value
-      attr(M, "counts") <- maxi$counts
-      attr(M, "convergence") <- maxi$convergence
-      attr(M, "message") <- maxi$message
-    } else {
-      f <- Vectorize(fn)
-      f <- f(x)
-      M <- x[f == max(f)]
-    }
+  if (!abc) {
+    M <- stats::optimize(f, range(x), maximum = TRUE, tol = tolerance)$maximum
+  } else {
+    f <- f(x)
+    M <- x[f == max(f)]
   }
   M
 }

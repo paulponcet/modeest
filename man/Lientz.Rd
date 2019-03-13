@@ -67,7 +67,7 @@ Lientz (1970) provided a way to estimate \eqn{S(x,\beta)}{S(x,b)}; this estimate
 is what we call the empirical Lientz function.
 }
 \note{
-The user should preferentially call \code{mlv.lientz} through 
+The user may call \code{mlv.lientz} through 
 \code{mlv(x, method = "lientz", ...)}.
 }
 \examples{

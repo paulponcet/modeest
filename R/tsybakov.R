@@ -14,7 +14,7 @@
 #' (with \code{alpha = 0.9} if \code{alpha} is missing).
 #' 
 #' @note 
-#' The user should preferentially call \code{tsybakov} through 
+#' The user may call \code{tsybakov} through 
 #' \code{mlv(x, method = "tsybakov", ...)}. 
 #' 
 #' @section
@@ -33,11 +33,13 @@
 #'   \emph{Probl. Inf. Transm.}, \bold{26}:31-37.
 #'   
 #'   \item Djeddour K., Mokkadem A. et Pelletier M. (2003).
-#'   Sur l'estimation recursive du mode et de la valeur modale d'une densite de probabilite.
+#'   Sur l'estimation recursive du mode et de la valeur modale d'une densite de 
+#'   probabilite.
 #'   \emph{Technical report 105}.
 #'   
 #'   \item Djeddour K., Mokkadem A. et Pelletier M. (2003).
-#'   Application du principe de moyennisation a l'estimation recursive du mode et de la valeur modale d'une densite de probabilite.
+#'   Application du principe de moyennisation a l'estimation recursive du mode 
+#'   et de la valeur modale d'une densite de probabilite.
 #'   \emph{Technical report 106}.
 #' }
 #' 
@@ -96,7 +98,7 @@ tsybakov <-
 function(x,
          bw = NULL,
          a,
-         alpha = 0.9,              # parameter 'alpha' (if 'a' is missing, a <- (1:length('x'))^(-alpha))
+         alpha = 0.9,
          kernel = "triangular", 
          dmp = TRUE, 
          par = shorth(x))

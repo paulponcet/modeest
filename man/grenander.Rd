@@ -38,7 +38,7 @@ The user should either give the bandwidth \code{bw} or the argument \code{k},
 \code{k} being taken equal to \code{ceiling(bw*n) - 1} if missing.
 }
 \note{
-The user should preferentially call \code{grenander} through 
+The user may call \code{grenander} through 
 \code{mlv(x, method = "grenander", bw, k, p, ...)}.
 }
 \examples{

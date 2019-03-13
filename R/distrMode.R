@@ -69,7 +69,7 @@ function(shape1,
     warning("still to be done. 'NA' is returned")
     M <- NA
   }
-  return(M)
+  M
 }
 
 
@@ -83,7 +83,7 @@ cauchyMode <-
 function(location = 0,
          ...)
 {
-  return(location)
+  location
 }
 
 
@@ -208,7 +208,7 @@ normMode <-
 function(mean = 0,
          ...)
 {
-  return(mean)
+  mean
 }
 
 
@@ -395,7 +395,7 @@ laplaceMode <-
 function(location = 0,
          ...)
 {
-  return(location)
+  location
 }
 
 
@@ -553,7 +553,7 @@ function(scale = 1,
 rayleighMode <-
 function(scale = 1)
 {
-  return(scale)
+  scale
 }
 
 
@@ -752,7 +752,7 @@ function(size,
 geomMode <-
 function(...)
 {
-  return(1)
+  1
 }
 
 

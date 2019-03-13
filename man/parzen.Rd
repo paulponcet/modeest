@@ -6,25 +6,20 @@
 \title{Parzen's Kernel mode estimator}
 \usage{
 parzen(x, bw = NULL, kernel = "gaussian", abc = FALSE,
-  par = shorth(x), optim.method = "BFGS", ...)
+  tolerance = .Machine$double.eps^0.25, ...)
 }
 \arguments{
 \item{x}{numeric. Vector of observations.}
 
 \item{bw}{numeric. The smoothing bandwidth to be used.}
 
-\item{kernel}{character. The kernel to be used. Available kernels are 
-\code{"biweight"}, \code{"cosine"}, \code{"eddy"}, \code{"epanechnikov"}, 
-\code{"gaussian"}, \code{"optcosine"}, \code{"rectangular"}, 
-\code{"triangular"}, \code{"uniform"}. 
-See \code{\link[stats]{density}} for more details on some of these kernels.}
+\item{kernel}{character. The kernel to be used. For available kernels see 
+\code{\link[statip]{densityfun}} in package \pkg{statip}.}
 
 \item{abc}{logical. If \code{FALSE} (the default), the kernel density estimate 
 is maximised using \code{\link[stats]{optim}}.}
 
-\item{par}{numeric. The initial value used in \code{\link[stats]{optim}}.}
-
-\item{optim.method}{character. If \code{abc = FALSE}, the method used in \code{\link[stats]{optim}}.}
+\item{tolerance}{numeric. Desired accuracy in the \code{\link[stats]{optimize}} function.}
 
 \item{...}{If \code{abc = FALSE}, further arguments to be passed to \code{\link[stats]{optim}}.}
 }
@@ -44,7 +39,7 @@ maximizing the kernel density estimate.
 If \code{kernel = "uniform"}, the \code{\link[modeest]{naive}} mode estimate is returned.
 }
 \note{
-The user should preferentially call \code{parzen} through 
+The user may call \code{parzen} through 
 \code{mlv(x, method = "kernel", ...)} or \code{mlv(x, method = "parzen", ...)}. 
 
 Presently, \code{parzen} is quite slow.

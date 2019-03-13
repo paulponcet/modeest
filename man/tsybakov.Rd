@@ -48,7 +48,7 @@ value advised by Djeddour et al (2003) is used:
 (with \code{alpha = 0.9} if \code{alpha} is missing).
 }
 \note{
-The user should preferentially call \code{tsybakov} through 
+The user may call \code{tsybakov} through 
 \code{mlv(x, method = "tsybakov", ...)}.
 }
 \section{Warning}{
@@ -80,11 +80,13 @@ mlv(x, method = "tsybakov", kernel = "gaussian", alpha = 0.99)
   \emph{Probl. Inf. Transm.}, \bold{26}:31-37.
   
   \item Djeddour K., Mokkadem A. et Pelletier M. (2003).
-  Sur l'estimation recursive du mode et de la valeur modale d'une densite de probabilite.
+  Sur l'estimation recursive du mode et de la valeur modale d'une densite de 
+  probabilite.
   \emph{Technical report 105}.
   
   \item Djeddour K., Mokkadem A. et Pelletier M. (2003).
-  Application du principe de moyennisation a l'estimation recursive du mode et de la valeur modale d'une densite de probabilite.
+  Application du principe de moyennisation a l'estimation recursive du mode 
+  et de la valeur modale d'une densite de probabilite.
   \emph{Technical report 106}.
 }
 }

@@ -34,7 +34,7 @@ Vieu's mode estimator is the value at which the kernel density derivative
 estimate is null.
 }
 \note{
-The user should preferentially call \code{vieu} through 
+The user may call \code{vieu} through 
 \code{mlv(x, method = "vieu", ...)}. 
 
 Presently, \code{vieu} is quite slow.

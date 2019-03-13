@@ -23,7 +23,7 @@ This mode estimator is based on the algorithm
 described in Asselin de Beauville (1978).
 }
 \note{
-The user should preferentially call \code{asselin} through 
+The user may call \code{asselin} through 
 \code{mlv(x, method = "asselin", ...)}.
 }
 \examples{

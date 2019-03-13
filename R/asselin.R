@@ -6,7 +6,7 @@
 #' described in Asselin de Beauville (1978).
 #' 
 #' @note 
-#' The user should preferentially call \code{asselin} through 
+#' The user may call \code{asselin} through 
 #' \code{mlv(x, method = "asselin", ...)}. 
 #' 
 #' @references 
@@ -101,7 +101,7 @@ function(x,
       nc <- sum(n[w:(w2-1)])
       
       ## There exists another chain, and the first chain has only one element
-      if (any(v3==1) & nc==1) {
+      if (any(v3==1) && nc==1) {
         if (k > 3) {
           k <- k-1
         } else if (k==3) {
@@ -115,7 +115,7 @@ function(x,
         }
       
       ## There exists another chain, and the first chain has more than one element
-      } else if (any(v3==1) & nc > 1) {
+      } else if (any(v3==1) && nc > 1) {
         if (k > 3) {
           k <- k-1
         

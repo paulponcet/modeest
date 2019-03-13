@@ -25,7 +25,7 @@ It is identical to Parzen's kernel mode estimator, when the kernel is chosen
 to be the uniform kernel.
 }
 \note{
-The user should preferentially call \code{naive} through 
+The user may call \code{naive} through 
 \code{mlv(x, method = "naive", bw)}.
 }
 \examples{
