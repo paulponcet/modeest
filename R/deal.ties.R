@@ -8,7 +8,8 @@
 function(ny,         # length of the data
          i,          # index
          tie.action, # action to be taken
-         tie.limit)  # limit
+         tie.limit,  # limit
+         warn = FALSE)
 {
   ## Deal with ties
   maxi <- max(i)

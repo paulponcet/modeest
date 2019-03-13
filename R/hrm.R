@@ -16,7 +16,7 @@
 #' and the procedure is iterated.
 #'
 #' @note 
-#' The user should preferentially call \code{hrm} through 
+#' The user may call \code{hrm} through 
 #' \code{mlv(x, method = "hrm", bw, ...)}. 
 #' 
 #' @references 
@@ -74,10 +74,10 @@
 hrm <-
 function(x,
          bw = NULL,
-         ...) # to do: introduce a 'k' argument
+         ...) # TODO: introduce a 'k' argument?
 {
   if (is.null(bw)) stop("argument 'bw' is missing")
-  if (bw <= 0 | bw > 1) stop("argument 'bw' must belong to (0, 1]")
+  if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]")
   
   y <- sort(x)
   genefilter::half.range.mode(y, beta = bw)

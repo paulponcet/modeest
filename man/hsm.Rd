@@ -42,7 +42,7 @@ If \code{bw} is of class \code{"function"},
 then \code{k = ceiling(bw(n)) - 1} instead.
 }
 \note{
-The user should preferentially call \code{hsm} through 
+The user may call \code{hsm} through 
 \code{mlv(x, method = "hsm", ...)}.
 }
 \examples{

@@ -9,16 +9,3 @@ statip::mfv
 #' @export
 #'
 statip::mfv1
-
-
-# Alias
-# #' @export 
-# #' @rdname mfv
-# #' 
-# discrete <- 
-# function(x,
-#          ...)
-# {
-#   .Deprecated("mfv")
-#   mfv(x, ...)
-# }

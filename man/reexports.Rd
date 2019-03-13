@@ -4,7 +4,6 @@
 \name{reexports}
 \alias{reexports}
 \alias{mfv}
-\alias{reexports}
 \alias{mfv1}
 \title{Objects exported from other packages}
 \keyword{internal}

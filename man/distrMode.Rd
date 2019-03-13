@@ -83,7 +83,8 @@ gpdMode(location = 0, scale = 1, shape = 0)
 
 gumbelMode(location = 0, ...)
 
-hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
+hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3,
+  4))
 
 koenkerMode(location = 0, ...)
 

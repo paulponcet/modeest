@@ -34,7 +34,7 @@ densest half range is then used to compute a new range,
 and the procedure is iterated.
 }
 \note{
-The user should preferentially call \code{hrm} through 
+The user may call \code{hrm} through 
 \code{mlv(x, method = "hrm", bw, ...)}.
 }
 \examples{

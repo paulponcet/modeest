@@ -1,8 +1,16 @@
+# modeest 2.3.3
+
+* Small updates in the documentation. 
+* Simplification and improvements in the code of `parzen()`, `vieu()`, 
+`tsybakov()`, `meanshift()`, `mlv()`. 
+
+
 # modeest 2.3.2
 
 * BREAKING CHANGE: `mlv()` no longer returns a list, it returns a vector of 
 values (usually one single value) for the sake of simplicity and homogeneity 
 with functions such as `mean()` or `median()`. 
+* `mfv()` or `mfv1()` are moved to package `statip` and reexported by `modeest`.
 * `discrete()` is now removed. Use `mfv()` or `mfv1()` instead. 
 
 
@@ -33,9 +41,7 @@ correctly.
 `laplaceMode()`, `paralogisticMode()`, `paretoMode()`, `rayleighMode()` are 
 added. 
 * Function `symstbMode()` is removed. 
-* Package modeest now needs to load `stabledist` and `VGAM` (in addition to 
-`stats`, `evd`, and `fBasics`). 
-  
+
 
 # modeest 1.09
 

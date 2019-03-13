@@ -35,7 +35,7 @@
 #' }
 #' 
 #' @note 
-#' The user should preferentially call \code{grenander} through 
+#' The user may call \code{grenander} through 
 #' \code{mlv(x, method = "grenander", bw, k, p, ...)}. 
 #'
 #' @param x 
@@ -95,20 +95,20 @@ function(x,
          ...)
 {
   if (p == Inf) {
-    cat("argument 'p' is infinite. Venter's mode estimator is used")
+    message("argument 'p' is infinite. Venter's mode estimator is used")
     return(venter(x = x, bw = bw, k = k, ...)) 
   }
 
   ny <- length(x)    
 
-  if (missing(k) & !is.null(bw)) {
-    if (bw <= 0 | bw > 1) stop("argument 'bw' must belong to (0, 1]")
+  if (missing(k) && !is.null(bw)) {
+    if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]")
     k <- ceiling(bw*ny) - 1
-  } else if (missing(k) & is.null(bw)) {
+  } else if (missing(k) && is.null(bw)) {
     k <- ceiling(ny/2) - 1
   }
   
-  if (k < 0 | k >= ny) stop("argument 'k' must belong to [0, length('x'))") 
+  if (k < 0 || k >= ny) stop("argument 'k' must belong to [0, length('x'))") 
 
   y <- sort(x)
 
@@ -117,7 +117,7 @@ function(x,
   diff <- sup - inf
   tot <- inf + sup
   if (any(diff==0)) {
-    warning("limiting value of Grenander mode used") #! ??
+    warning("limiting value of Grenander mode used") # TODO: be more specific
     M <- mean(ifelse(diff==0, tot, NA), na.rm = TRUE)/2
   } else {
     b <- sum(tot/diff^p)/2

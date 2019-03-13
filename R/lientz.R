@@ -28,7 +28,7 @@
 #' is what we call the empirical Lientz function. 
 #' 
 #' @note 
-#' The user should preferentially call \code{mlv.lientz} through 
+#' The user may call \code{mlv.lientz} through 
 #' \code{mlv(x, method = "lientz", ...)}. 
 #' 
 #' @param x 
@@ -109,7 +109,7 @@ lientz <-
 function(x,
          bw = NULL)
 {
-  if (bw <= 0 | bw >= 1) stop("argument 'bw' must belong to (0, 1)")
+  if (bw <= 0 || bw >= 1) stop("argument 'bw' must belong to (0, 1)")
   
   y <- sort(x)
   ny <- length(y)
@@ -168,7 +168,7 @@ function(x,            # an object of class 'lientz'
   ylab <- arg$ylab
 
   xx <- attr(x, "x")
-  bw <- attr(x, "bw") 
+  #bw <- attr(x, "bw") 
   
   inf <- min(xx)
   sup <- max(xx)
