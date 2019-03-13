@@ -43,9 +43,9 @@
 #' See \code{\link[modeest]{distrMode}} for the available functions. 
 #' The mode of the corresponding distribution is returned. 
 #' 
-#' If \code{x} is of class \code{"density"}, the value where the density is 
-#' maximised is returned. 
-#' 
+# #' If \code{x} is of class \code{"density"}, the value where the density is 
+# #' maximised is returned. 
+# #' 
 #' If \code{x} is of class \code{mlv.lientz}, see \code{\link[modeest]{Lientz}} 
 #' for more details. 
 #' 
@@ -65,13 +65,13 @@
 #' @param na.rm
 #' logical. Should missing values be removed? 
 #' 
-#' @param all
-#' logical. 
-#' 
-#' @param abc
-#' logical. If \code{FALSE} (the default), the estimate of the density function 
-#' is maximised using \code{\link{optim}}. 
-#' 
+# #' @param all
+# #' logical. 
+# #' 
+# #' @param abc
+# #' logical. If \code{FALSE} (the default), the estimate of the density function 
+# #' is maximised using \code{\link{optim}}. 
+# #' 
 #' @param ...
 #' Further arguments to be passed to the function called for computation. 
 #' 
@@ -101,7 +101,7 @@
 #' ## True mode
 #' betaMode(23, 4)
 #' # or
-#' mlv("beta", 23, 4)
+#' mlv("beta", shape1 = 23, shape2 = 4)
 #' 
 #' ## Be aware of this behaviour: 
 #' mlv("norm") # returns 0, the mode of the standard normal distribution
@@ -239,56 +239,56 @@ function(x,
 }
 
 
-#' @export
-#' @rdname mlv
-#' 
-mlv.density <-
-function(x,
-         all = TRUE, 
-         abc = FALSE,
-         ...)
-{
-  # TODO: A MODIFIER EN MEME TEMPS QUE 'parzen'
-  
-  if (!inherits(x, "density")) stop("argument 'x' must inherit from class 'density'")
-  
-  y <- x$y
-  x <- x$x
-
-  den.s <- stats::smooth.spline(x, y, all.knots=TRUE, spar=spar)
-  s.1 <- stats::predict(den.s, den.s$x, deriv = 1)
-  s.0 <- stats::predict(den.s, den.s$x, deriv = 0)
-  
-  den.sign <- sign(s.1$y)
-  b <- rle(den.sign)$values
-  nmodes <- length(b)/2
-  #if (nmodes > 10) { nmodes <- 10 }
-  if (is.na(nmodes)) { nmodes <- 0 }
-  
-  a <- c(1,1+which(diff(den.sign)!=0))
-  df <- data.frame(a,b)
-  df <- df[which(df$b %in% -1),]
-  modes <- s.1$x[df$a]
-  density <- s.0$y[df$a]
-  df2 <- data.frame(modes,density)
-  df2 <- df2[with(df2, order(-density)), ] # ordered by density
-  df2
-  
-  
-#-------------------  
-  
-  idx <- y == max(y)
-  M <- x[idx]
-
-  if (all) {
-    yy <- c(0, y, 0)
-    ny <- length(yy)
-    idx <- (yy[2:(ny - 1)] > yy[1:(ny - 2)]) & (yy[2:(ny - 1)] > yy[3:ny])
-    M <- unique(c(x[idx], M))
-  }
-   
-  M
-}
+# #' @export
+# #' @rdname mlv
+# #' 
+# mlv.density <-
+# function(x,
+#          all = TRUE, 
+#          abc = FALSE,
+#          ...)
+# {
+#   # TODO: A MODIFIER EN MEME TEMPS QUE 'parzen'
+#   
+#   if (!inherits(x, "density")) stop("argument 'x' must inherit from class 'density'")
+#   
+#   y <- x$y
+#   x <- x$x
+# 
+#   den.s <- stats::smooth.spline(x, y, all.knots=TRUE, spar=spar)
+#   s.1 <- stats::predict(den.s, den.s$x, deriv = 1)
+#   s.0 <- stats::predict(den.s, den.s$x, deriv = 0)
+#   
+#   den.sign <- sign(s.1$y)
+#   b <- rle(den.sign)$values
+#   nmodes <- length(b)/2
+#   #if (nmodes > 10) { nmodes <- 10 }
+#   if (is.na(nmodes)) { nmodes <- 0 }
+#   
+#   a <- c(1,1+which(diff(den.sign)!=0))
+#   df <- data.frame(a,b)
+#   df <- df[which(df$b %in% -1),]
+#   modes <- s.1$x[df$a]
+#   density <- s.0$y[df$a]
+#   df2 <- data.frame(modes,density)
+#   df2 <- df2[with(df2, order(-density)), ] # ordered by density
+#   df2
+#   
+#   
+# #-------------------  
+#   
+#   idx <- y == max(y)
+#   M <- x[idx]
+# 
+#   if (all) {
+#     yy <- c(0, y, 0)
+#     ny <- length(yy)
+#     idx <- (yy[2:(ny - 1)] > yy[1:(ny - 2)]) & (yy[2:(ny - 1)] > yy[3:ny])
+#     M <- unique(c(x[idx], M))
+#   }
+#    
+#   M
+# }
 
 
 #' @export

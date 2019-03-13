@@ -7,7 +7,6 @@
 \alias{mlv.logical}
 \alias{mlv.integer}
 \alias{mlv.default}
-\alias{mlv.density}
 \alias{mlv1}
 \title{Estimation of the Mode(s) or Most Likely Value(s)}
 \usage{
@@ -23,8 +22,6 @@ mlv(x, ...)
 
 \method{mlv}{default}(x, bw = NULL, method, na.rm = FALSE, ...)
 
-\method{mlv}{density}(x, all = TRUE, abc = FALSE, ...)
-
 mlv1(x, ...)
 }
 \arguments{
@@ -38,11 +35,6 @@ mlv1(x, ...)
 This may have different meanings regarding the \code{method} used.}
 
 \item{method}{character. One of the methods available for computing the mode estimate. See 'Details'.}
-
-\item{all}{logical.}
-
-\item{abc}{logical. If \code{FALSE} (the default), the estimate of the density function 
-is maximised using \code{\link{optim}}.}
 }
 \value{
 A vector of the same type as \code{x}. 
@@ -87,9 +79,6 @@ i.e. a character for which a function \code{*Mode} exists
 See \code{\link[modeest]{distrMode}} for the available functions. 
 The mode of the corresponding distribution is returned. 
 
-If \code{x} is of class \code{"density"}, the value where the density is 
-maximised is returned. 
-
 If \code{x} is of class \code{mlv.lientz}, see \code{\link[modeest]{Lientz}} 
 for more details.
 }
@@ -100,7 +89,7 @@ x <- rbeta(1000,23,4)
 ## True mode
 betaMode(23, 4)
 # or
-mlv("beta", 23, 4)
+mlv("beta", shape1 = 23, shape2 = 4)
 
 ## Be aware of this behaviour: 
 mlv("norm") # returns 0, the mode of the standard normal distribution

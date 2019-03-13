@@ -44,7 +44,7 @@
 #' returned. Otherwise, the \code{\link[stats]{uniroot}} method is used.
 #' 
 #' @importFrom stats uniroot
-#' @importFrom statip .kernelsList kernelfun
+#' @importFrom statip .kernelsList bandwidth kernelfun
 #' @export
 #' @aliases Vieu
 #' 
@@ -76,6 +76,7 @@ function(x,
     
   if (is.null(bw)) bw <- "nrd0"
   f <- statip::densityfun(x, bw = bw, kernel = kernel, ...)
+  bw <- statip::bandwidth(x, bw)
   
   fn <- 
   function(z)
@@ -88,6 +89,7 @@ function(x,
     r <- stats::uniroot(f = fn, interval = range(x), ...)
     M <- r$root
   } else {
+    .NotYetImplemented()
     #FN <- Vectorize(fn)
     #f <- abs(FN(x)) 
     #M <- x[f == min(f)]

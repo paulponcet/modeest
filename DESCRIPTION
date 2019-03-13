@@ -10,6 +10,7 @@ License: GPL-3
 LazyData: TRUE
 Depends:
     R (>= 3.1.3)
+biocViews: 
 Imports:
     bazar,
     fBasics,
@@ -18,17 +19,12 @@ Imports:
     stabledist,
     stats,
     statip
-biocViews: 
 Suggests:
     evd,
     knitr,
     mvtnorm,
     testthat,
     VGAM
-Remotes: 
-    bioc::3.8/genefilter
-VignetteBuilder: 
-    knitr
 URL: https://github.com/paulponcet/modeest
 BugReports: https://github.com/paulponcet/modeest/issues
 RoxygenNote: 6.1.1
