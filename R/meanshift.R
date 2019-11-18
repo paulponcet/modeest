@@ -72,7 +72,8 @@ function(x,
   if (is.null(bw)) bw <- "nrd0"
   if (is.character(bw)) {
     if (length(x) < 2L) 
-      stop("need at least 2 points to select a bandwidth automatically")
+      stop("need at least 2 points to select a bandwidth automatically", 
+           call. = FALSE)
     bw <- switch(tolower(bw), 
                  nrd0 = stats::bw.nrd0(x), 
                  nrd = stats::bw.nrd(x), 
@@ -81,7 +82,7 @@ function(x,
                  sj = , 
                  `sj-ste` = stats::bw.SJ(x, method = "ste"), 
                  `sj-dpi` = stats::bw.SJ(x, method = "dpi"), 
-                 stop("unknown bandwidth rule"))
+                 stop("unknown bandwidth rule", call. = FALSE))
   }
   s <- 0
   for (j in seq_len(iter)) {
@@ -89,7 +90,8 @@ function(x,
     k <- statip::kernelfun(kernel)(z)
     M <- crossprod(x, k)/sum(k)
     if (is.nan(M)) stop("sum(k) is zero in the meanshift function. Change the 
-                         bandwidth 'bw' or the initial value 'par'.")
+                         bandwidth 'bw' or the initial value 'par'.", 
+                        call. = FALSE)
     th <- abs(M/par-1)
     if (th < tolerance) {
       s <- j

@@ -2,9 +2,12 @@
 #' Bickel's half-range mode estimator
 #' 
 #' @description 
+#' SINCE THIS FUNCTION USED TO DEPEND ON THE BIOCONDUCTOR PACKAGE 'GENEFILTER', 
+#' IT IS CURRENTLY DEFUNCT.
+#' 
 #' This function computes Bickel's half range mode estimator 
 #' described in Bickel (2002). It is a wrapper around the function 
-#' \code{\link[genefilter]{half.range.mode}} from package \pkg{genefilter}. 
+#' \code{half.range.mode} from package \pkg{genefilter}. 
 #'
 #' @details 
 #' The mode estimator is computed by iteratively identifying 
@@ -53,15 +56,16 @@
 #' see package \pkg{genefilter}. The algorithm is described in Bickel (2002).
 #' 
 #' @seealso 
-#' \code{\link[modeest]{mlv}} for general mode estimation; 
-#' \code{\link[modeest]{hsm}} for the half sample mode;  
-#' \code{\link[modeest]{venter}} for the Venter mode estimate. 
+#' \code{\link[modeest]{mlv}()} for general mode estimation; 
+#' \code{\link[modeest]{hsm}()} for the half sample mode;  
+#' \code{\link[modeest]{venter}()} for the Venter mode estimate. 
 #' 
-#' @importFrom genefilter half.range.mode
+# #' @importFrom genefilter half.range.mode
 #' @export
 #' @aliases HRM
 #' 
 #' @examples 
+#' \dontrun{
 #' # Unimodal distribution 
 #' x <- rgamma(1000, shape = 31.9)
 #' ## True mode
@@ -70,15 +74,23 @@
 #' ## Estimate of the mode
 #' hrm(x, bw = 0.4)
 #' mlv(x, method = "hrm", bw = 0.4)
+#' }
 #' 
 hrm <-
 function(x,
          bw = NULL,
          ...) # TODO: introduce a 'k' argument?
 {
-  if (is.null(bw)) stop("argument 'bw' is missing")
-  if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]")
+  .Defunct("genefilter::half.range.mode",
+           msg = paste0("currently 'hrm()' is due to difficulties ",
+                        "in installing automatically BioConductor's ",
+                        "'genefilter' dependency"))
+  if (is.null(bw)) stop("argument 'bw' is missing", call. = FALSE)
+  if (bw <= 0 || bw > 1) {
+    stop("argument 'bw' must belong to (0, 1]", 
+         call. = FALSE)
+  }
   
   y <- sort(x)
-  genefilter::half.range.mode(y, beta = bw)
+  #genefilter::half.range.mode(y, beta = bw)
 } 

@@ -5,8 +5,14 @@
 \alias{Parzen}
 \title{Parzen's Kernel mode estimator}
 \usage{
-parzen(x, bw = NULL, kernel = "gaussian", abc = FALSE,
-  tolerance = .Machine$double.eps^0.25, ...)
+parzen(
+  x,
+  bw = NULL,
+  kernel = "gaussian",
+  abc = FALSE,
+  tolerance = .Machine$double.eps^0.25,
+  ...
+)
 }
 \arguments{
 \item{x}{numeric. Vector of observations.}

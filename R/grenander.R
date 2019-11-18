@@ -102,13 +102,19 @@ function(x,
   ny <- length(x)    
 
   if (missing(k) && !is.null(bw)) {
-    if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]")
+    if (bw <= 0 || bw > 1) {
+      stop("argument 'bw' must belong to (0, 1]", 
+           call. = FALSE)
+    }
     k <- ceiling(bw*ny) - 1
   } else if (missing(k) && is.null(bw)) {
     k <- ceiling(ny/2) - 1
   }
   
-  if (k < 0 || k >= ny) stop("argument 'k' must belong to [0, length('x'))") 
+  if (k < 0 || k >= ny) {
+    stop("argument 'k' must belong to [0, length('x'))", 
+         call. = FALSE)
+  }
 
   y <- sort(x)
 
@@ -117,7 +123,8 @@ function(x,
   diff <- sup - inf
   tot <- inf + sup
   if (any(diff==0)) {
-    warning("limiting value of Grenander mode used") # TODO: be more specific
+    warning("limiting value of Grenander mode used", 
+            call. = FALSE) # TODO: be more specific
     M <- mean(ifelse(diff==0, tot, NA), na.rm = TRUE)/2
   } else {
     b <- sum(tot/diff^p)/2
@@ -125,7 +132,8 @@ function(x,
     if (is.finite(b/a)) {
       M <- b/a
     } else {
-      stop("function 'grenander' failed. Argument 'p' may be too large")
+      stop("function 'grenander' failed. Argument 'p' may be too large", 
+           call. = FALSE)
     }
   }
   M

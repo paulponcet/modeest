@@ -77,7 +77,7 @@ function(x,
 {
   method <- match.arg(tolower(method), c("moment", "fisher", "bickel"))
   if (!is.numeric(x)) {
-    stop("argument 'x' is must be numeric")
+    stop("argument 'x' is must be numeric", call. = FALSE)
   }
   if (na.rm) x <- x[!is.na(x)]
   nx <- length(x)

@@ -14,8 +14,7 @@ lientz(x, bw = NULL)
 
 \method{print}{lientz}(x, digits = NULL, ...)
 
-\method{mlv}{lientz}(x, bw = NULL, abc = FALSE, par = shorth(x),
-  optim.method = "BFGS", ...)
+\method{mlv}{lientz}(x, bw = NULL, abc = FALSE, par = shorth(x), optim.method = "BFGS", ...)
 }
 \arguments{
 \item{x}{numeric (vector of observations) or an object of class \code{"lientz"}.}

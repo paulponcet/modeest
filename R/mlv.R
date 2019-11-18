@@ -27,7 +27,7 @@
 #' @details 
 #' For the default method of \code{mlv}, available methods are \code{"lientz"}, 
 #' \code{"naive"}, \code{"venter"}, 
-#' \code{"grenander"}, \code{"hsm"}, \code{"hrm"}, \code{"parzen"}, 
+#' \code{"grenander"}, \code{"hsm"}, \code{"parzen"}, 
 #' \code{"tsybakov"}, \code{"asselin"}, and \code{"meanshift"}. 
 #' See the description above and the associated links. 
 #' 
@@ -85,7 +85,7 @@
 #' \code{\link[modeest]{venter}}, 
 #' \code{\link[modeest]{meanshift}},
 #' \code{\link[modeest]{grenander}}, 
-#' \code{\link[modeest]{hrm}}, 
+# #' \code{\link[modeest]{hrm}}, 
 #' \code{\link[modeest]{hsm}}, 
 #' \code{\link[modeest]{lientz}}, 
 #' \code{\link[modeest]{naive}}, 
@@ -115,7 +115,7 @@
 #' mlv(x, method = "naive", bw = 1/3)
 #' mlv(x, method = "venter", type = "shorth")
 #' mlv(x, method = "grenander", p = 4)
-#' mlv(x, method = "hrm", bw = 0.3)
+# #' mlv(x, method = "hrm", bw = 0.3)
 #' mlv(x, method = "hsm")
 #' mlv(x, method = "parzen", kernel = "gaussian")
 #' mlv(x, method = "tsybakov", kernel = "gaussian")
@@ -144,7 +144,7 @@ function(x,
   if (length(x)==1L && statip::name2distr(x) %in% .distributionsList()) {
     distrMode(x, ...)
   } else {
-    mfv(x, na.rm = na.rm)
+    mfv(x, na_rm = na.rm)
   }
 }
 
@@ -158,7 +158,7 @@ function(x,
          ...)
 {
   stopifnot(is.factor(x))
-  mfv(x, na.rm = na.rm)
+  mfv(x, na_rm = na.rm)
 }
 
 
@@ -171,7 +171,7 @@ function(x,
          ...)
 {
   stopifnot(is.logical(x))
-  mfv(x, na.rm = na.rm)
+  mfv(x, na_rm = na.rm)
 }
 
 
@@ -184,11 +184,11 @@ function(x,
          ...)
 {
   stopifnot(is.integer(x))
-  mfv(x, na.rm = na.rm)
+  mfv(x, na_rm = na.rm)
 }
 
 
-# #' @importFrom bazar is.wholenumber
+# #' @importFrom bazar is_wholenumber
 #' @export
 #' @rdname mlv
 #' 
@@ -203,9 +203,9 @@ function(x,
   stopifnot(is.numeric(x))
   x <- as.vector(x)
 
-  #test <- bazar::is.wholenumber(x)
+  #test <- bazar::is_wholenumber(x)
   #if (is.na(test) || test) {
-  #  return(mfv(as.integer(round(x)), na.rm = na.rm))
+  #  return(mfv(as.integer(round(x)), na_rm = na.rm))
   #}
   
   x.na <- is.na(x)
@@ -213,7 +213,8 @@ function(x,
     if (na.rm) {
       x <- x[!x.na]
     } else {
-      stop("argument 'x' contains missing values")
+      stop("argument 'x' contains missing values", 
+           call. = FALSE)
     }
   }
 
@@ -224,7 +225,8 @@ function(x,
 
   if (missing(method)) {
     warning("argument 'method' is missing. Data are supposed to be continuous. 
-            Default method 'shorth' is used")
+            Default method 'shorth' is used", 
+            call. = FALSE)
     method <- "shorth"
   #} else if (tolower(method) == "mfv") {
   #  stop("incorrect 'method' argument")

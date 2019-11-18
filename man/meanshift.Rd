@@ -4,8 +4,14 @@
 \alias{meanshift}
 \title{The Meanshift mode estimator}
 \usage{
-meanshift(x, bw = NULL, kernel = "gaussian", par = shorth(x),
-  iter = 1000, tolerance = sqrt(.Machine$double.eps))
+meanshift(
+  x,
+  bw = NULL,
+  kernel = "gaussian",
+  par = shorth(x),
+  iter = 1000,
+  tolerance = sqrt(.Machine$double.eps)
+)
 }
 \arguments{
 \item{x}{numeric. Vector of observations.}

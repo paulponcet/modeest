@@ -109,7 +109,9 @@ lientz <-
 function(x,
          bw = NULL)
 {
-  if (bw <= 0 || bw >= 1) stop("argument 'bw' must belong to (0, 1)")
+  if (bw <= 0 || bw >= 1) {
+    stop("argument 'bw' must belong to (0, 1)", call. = FALSE)
+  }
   
   y <- sort(x)
   ny <- length(y)
@@ -208,7 +210,8 @@ function(x,             # an object of class 'lientz'
          ...)
 {
   if (!inherits(x, "lientz")) {
-    stop("argument 'x' must inherit from class 'lientz'")
+    stop("argument 'x' must inherit from class 'lientz'", 
+         call. = FALSE)
   }
   bw <- attr(x, "bw")
   call <- attr(x, "call")

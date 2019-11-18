@@ -6,8 +6,16 @@
 \alias{shorth}
 \title{The Venter / Dalenius / LMS mode estimator}
 \usage{
-venter(x, bw = NULL, k, iter = 1, type = 1, tie.action = "mean",
-  tie.limit = 0.05, warn = FALSE)
+venter(
+  x,
+  bw = NULL,
+  k,
+  iter = 1,
+  type = 1,
+  tie.action = "mean",
+  tie.limit = 0.05,
+  warn = FALSE
+)
 
 shorth(x, ...)
 }
