@@ -20,9 +20,12 @@ each step of the iterative algorithm.}
 A numeric value is returned, the mode estimate.
 }
 \description{
+SINCE THIS FUNCTION USED TO DEPEND ON THE BIOCONDUCTOR PACKAGE 'GENEFILTER', 
+IT IS CURRENTLY DEFUNCT.
+
 This function computes Bickel's half range mode estimator 
 described in Bickel (2002). It is a wrapper around the function 
-\code{\link[genefilter]{half.range.mode}} from package \pkg{genefilter}.
+\code{half.range.mode} from package \pkg{genefilter}.
 }
 \details{
 The mode estimator is computed by iteratively identifying 
@@ -38,6 +41,7 @@ The user may call \code{hrm} through
 \code{mlv(x, method = "hrm", bw, ...)}.
 }
 \examples{
+\dontrun{
 # Unimodal distribution 
 x <- rgamma(1000, shape = 31.9)
 ## True mode
@@ -46,6 +50,7 @@ gammaMode(shape = 31.9)
 ## Estimate of the mode
 hrm(x, bw = 0.4)
 mlv(x, method = "hrm", bw = 0.4)
+}
 
 }
 \references{
@@ -65,9 +70,9 @@ mlv(x, method = "hrm", bw = 0.4)
 }
 }
 \seealso{
-\code{\link[modeest]{mlv}} for general mode estimation; 
-\code{\link[modeest]{hsm}} for the half sample mode;  
-\code{\link[modeest]{venter}} for the Venter mode estimate.
+\code{\link[modeest]{mlv}()} for general mode estimation; 
+\code{\link[modeest]{hsm}()} for the half sample mode;  
+\code{\link[modeest]{venter}()} for the Venter mode estimate.
 }
 \author{
 The C and R code are due to Richard Bourgon \email{bourgon@stat.berkeley.edu}, 
