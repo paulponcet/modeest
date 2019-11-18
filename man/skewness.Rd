@@ -4,8 +4,7 @@
 \alias{skewness}
 \title{Skewness}
 \usage{
-skewness(x, na.rm = FALSE, method = c("moment", "fisher", "bickel"), M,
-  ...)
+skewness(x, na.rm = FALSE, method = c("moment", "fisher", "bickel"), M, ...)
 }
 \arguments{
 \item{x}{numeric. Vector of observations.}

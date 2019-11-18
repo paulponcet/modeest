@@ -5,8 +5,15 @@
 \alias{Tsybakov}
 \title{The Tsybakov mode estimator}
 \usage{
-tsybakov(x, bw = NULL, a, alpha = 0.9, kernel = "triangular",
-  dmp = TRUE, par = shorth(x))
+tsybakov(
+  x,
+  bw = NULL,
+  a,
+  alpha = 0.9,
+  kernel = "triangular",
+  dmp = TRUE,
+  par = shorth(x)
+)
 }
 \arguments{
 \item{x}{numeric. Vector of observations.}

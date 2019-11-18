@@ -91,36 +91,36 @@ function(x,
 
       ## Beginning of the first chain
       w <- which.max(v)
-      v2 <- v[w:(k+1)]
+      v2 <- v[w:(k + 1)]
 
       ## End of the first chain
       w2 <- which.min(v2) + w - 1
-      v3 <- v[w2:(k+1)]
+      v3 <- v[w2:(k + 1)]
 
       ## Length of the first chain
-      nc <- sum(n[w:(w2-1)])
+      nc <- sum(n[w:(w2 - 1)])
       
       ## There exists another chain, and the first chain has only one element
-      if (any(v3==1) && nc==1) {
+      if (any(v3 == 1) && nc == 1) {
         if (k > 3) {
           k <- k-1
-        } else if (k==3) {
+        } else if (k == 3) {
           if (n[3] > 1) {
             w <- 3
             w2 <- 4
           } 
           ok2 <- TRUE
         } else {
-          stop("k < 3")
+          stop("k < 3", call. = FALSE)
         }
       
       ## There exists another chain, and the first chain has more than one element
-      } else if (any(v3==1) && nc > 1) {
+      } else if (any(v3 == 1) && nc > 1) {
         if (k > 3) {
           k <- k-1
         
         ### In this case, w = 1 necessarily
-        } else if (k==3) {
+        } else if (k == 3) {
           if (n[3] > 1) {           
             p1 <- (1/n[1])*prod(diff(yab[yab >= b[w] & yab <= b[w2]])) # here, n[1] = length(first chain)
             p2 <- (1/n[3])*prod(diff(yab[yab >= b[3] & yab <= b[4]])) # and n[3] = length(second chain)
@@ -131,11 +131,11 @@ function(x,
           }
           ok2 <- TRUE
         } else {
-          stop("k < 3")
+          stop("k < 3", call. = FALSE)
         }
       
       ## There is no other chain: the modal chain is found!
-      } else if (!any(v3==1)) {
+      } else if (!any(v3 == 1)) {
         ok2 <- TRUE
       }
 

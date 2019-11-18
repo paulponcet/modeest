@@ -17,7 +17,8 @@ function(ny,         # length of the data
   if (maxi-mini > tie.limit * ny) {
     warning(paste("encountered a tie, and the difference between minimal and 
                    maximal value is > length('x') * 'tie.limit'",
-                  "the distribution could be multimodal", sep="\n"))
+                  "the distribution could be multimodal", sep="\n"), 
+            call. = FALSE)
   }
   
   ## Take the action specified in "tie.action"
@@ -26,5 +27,6 @@ function(ny,         # length of the data
          median = stats::median(i),
          max = maxi,
          min = mini,
-         stop(sprintf("invalid value '%s' for argument 'tie.action'", tie.action)))
+         stop(sprintf("invalid value '%s' for argument 'tie.action'", tie.action), 
+              call. = FALSE))
 }

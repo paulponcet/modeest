@@ -124,12 +124,14 @@ function(x,
   if (type == "-Inf" || type == "5") type <- "ekblom"
   if (type == "6") type <- "hsm"
   
-  if (type == "hsm") return(hsm(x = x, bw = bw, k = k, tie.action = tie.action, 
-                                tie.limit = tie.limit))
+  if (type == "hsm") {
+    return(hsm(x = x, bw = bw, k = k, tie.action = tie.action, 
+               tie.limit = tie.limit))
+  }
   
   if (missing(k) && !is.null(bw)) {
-    if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]")
-    k <- ceiling(bw*ny) - 1
+    if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]", call. = FALSE)
+    k <- ceiling(bw * ny) - 1
   } else if (missing(k) & is.null(bw)) {
     if (type == "ekblom") {
       k <- 1
@@ -138,14 +140,14 @@ function(x,
     }
   }
     
-  if (k < 0 || k >= ny) stop("argument 'k' must belong to [0, length('x'))") 
+  if (k < 0 || k >= ny) stop("argument 'k' must belong to [0, length('x'))", call. = FALSE) 
   
   y <- sort(x)
 
   inf <- y[1:(ny-k)]
   sup <- y[(k+1):ny]
   diffs <- sup - inf
-  i <- which(diffs==min(diffs))
+  i <- which(diffs == min(diffs))
   
   ## Ties?
   if (length(i) > 1) i <- .deal.ties(ny, i, tie.action, tie.limit, warn = warn)
@@ -159,8 +161,8 @@ function(x,
               "ekblom" = ifelse(y[i+2]-y[i+1]>y[i]-y[i-1], y[i], y[i+1]))
   
   if (iter > 1) {
-    M <- Recall(x=y[i:(i+k)], bw=(k+1)/ny, iter = iter-1, type=type, 
-                tie.action=tie.action, tie.limit=tie.limit)
+    M <- Recall(x = y[i:(i+k)], bw = (k + 1)/ny, iter = iter-1, type = type, 
+                tie.action = tie.action, tie.limit = tie.limit)
   }
     
   #attr(M, "inf") <- y[i]

@@ -63,7 +63,7 @@ Different estimates (or methods) are provided:
 \details{
 For the default method of \code{mlv}, available methods are \code{"lientz"}, 
 \code{"naive"}, \code{"venter"}, 
-\code{"grenander"}, \code{"hsm"}, \code{"hrm"}, \code{"parzen"}, 
+\code{"grenander"}, \code{"hsm"}, \code{"parzen"}, 
 \code{"tsybakov"}, \code{"asselin"}, and \code{"meanshift"}. 
 See the description above and the associated links. 
 
@@ -103,7 +103,6 @@ mlv(x, method = "lientz", bw = 0.2)
 mlv(x, method = "naive", bw = 1/3)
 mlv(x, method = "venter", type = "shorth")
 mlv(x, method = "grenander", p = 4)
-mlv(x, method = "hrm", bw = 0.3)
 mlv(x, method = "hsm")
 mlv(x, method = "parzen", kernel = "gaussian")
 mlv(x, method = "tsybakov", kernel = "gaussian")
@@ -121,7 +120,6 @@ See the references on mode estimation on the \code{\link[modeest]{modeest-packag
 \code{\link[modeest]{venter}}, 
 \code{\link[modeest]{meanshift}},
 \code{\link[modeest]{grenander}}, 
-\code{\link[modeest]{hrm}}, 
 \code{\link[modeest]{hsm}}, 
 \code{\link[modeest]{lientz}}, 
 \code{\link[modeest]{naive}}, 

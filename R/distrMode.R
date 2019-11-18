@@ -66,7 +66,8 @@ function(shape1,
   if (ncp == 0) {
     M <- (shape1-1)/(shape1+shape2-2)
   } else {
-    warning("still to be done. 'NA' is returned")
+    warning("still to be done. 'NA' is returned", 
+            call. = FALSE)
     M <- NA
   }
   M
@@ -100,7 +101,8 @@ function(df,
   if (ncp == 0) {
     M <- max(df-2, 0)
   } else {
-    warning("still to be done. 'NA' is returned")
+    warning("still to be done. 'NA' is returned", 
+            call. = FALSE)
     M <- NA
   }
   M
@@ -146,7 +148,8 @@ function(df1,
   if (df1 > 2) {
     M <- (1-2/df1)*(df2/(2+df2))
   } else {
-    warning("still to be done. 'NA' is returned")
+    warning("still to be done. 'NA' is returned", 
+            call. = FALSE)
     M <- NA
   }
   M
@@ -313,12 +316,14 @@ function(location = 0,
          shape = 0)
 {
   if (shape == -1) {
-    warning("all values between 'loc' and 'loc+scale' are modes, only the mean value is returned")
+    warning("all values between 'loc' and 'loc+scale' are modes, only the mean value is returned", 
+            call. = FALSE)
     M <- location + scale/2  
   } else if (-2-1/shape > 0) {
     M <- location - scale/shape
   } else {
-    warning("the density is not continuous at the mode.")
+    warning("the density is not continuous at the mode",
+            call. = FALSE)
     M <- location
   }
   M
@@ -517,7 +522,8 @@ function(scale = 1,
          shape1.a)
 {
   if (shape1.a <= 1) {
-    warning("the density is not continuous at the mode.")
+    warning("the density is not continuous at the mode", 
+            call. = FALSE)
     0
   } else {
     scale*((shape1.a-1)/(shape1.a^2+1))^(1/shape1.a)
@@ -539,7 +545,8 @@ paretoMode <-
 function(scale = 1,
          ...)
 {
-  warning("the density is not continuous at the mode.")  
+  warning("the density is not continuous at the mode", 
+          call. = FALSE)  
   scale
 }
 
@@ -587,7 +594,8 @@ function(alpha,
                          beta = beta, pm = 0, maximum = TRUE, tol = tol)$maximum    
     return(M)
   } else {
-    warning("still to be done. 'NA' is returned")
+    warning("still to be done. 'NA' is returned", 
+            call. = FALSE)
     return(NA)
   }
 }
@@ -643,7 +651,8 @@ function(df,
   if (ncp == 0) {
     M <- 0
   } else {
-    warning("still to be done. 'NA' is returned")
+    warning("still to be done. 'NA' is returned", 
+            call. = FALSE)
     M <- NA
   }
   M
@@ -660,7 +669,8 @@ unifMode <-
 function(min = 0,
          max = 1)
 {
-  warning("all values between 'min' and 'max' are modes, only the mean value is returned")
+  warning("all values between 'min' and 'max' are modes, only the mean value is returned", 
+          call. = FALSE)
   (min+max)/2
 }
 

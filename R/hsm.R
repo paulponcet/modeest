@@ -88,13 +88,16 @@ function(x,
          ...)
 {
   if (!missing(k) && is.null(bw)) {
-    bw <- (k+1)/length(x)
+    bw <- (k + 1)/length(x)
   } else if (missing(k) && is.null(bw)) {
     bw <- 1/2
   }
 
   if (is.numeric(bw)) {
-    if (bw <= 0 || bw > 1) stop("argument 'bw' must belong to (0, 1]")
+    if (bw <= 0 || bw > 1) {
+      stop("argument 'bw' must belong to (0, 1]",
+           call. = FALSE)
+    }
   }
   
   y <- sort(x)
