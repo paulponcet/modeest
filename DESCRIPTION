@@ -7,7 +7,7 @@ Description: Provides estimators of the mode of univariate
     data or univariate distributions. 
 License: GPL-3
 Depends:
-    R (>= 3.2)
+    R (>= 3.4)
 Imports:
     fBasics,
     stable,
@@ -15,7 +15,6 @@ Imports:
     stats,
     statip (>= 0.2.3)
 Suggests:
-    evd,
     knitr,
     mvtnorm,
     testthat,

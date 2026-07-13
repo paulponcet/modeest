@@ -90,11 +90,9 @@
 #' @export 
 #' @aliases Venter
 #' 
-#' @examples 
-#' library(evd)
-#' 
+#' @examplesIf requireNamespace("VGAM")
 #' # Unimodal distribution
-#' x <- rgev(1000, loc = 23, scale = 1.5, shape = 0)
+#' x <- VGAM::rgev(1000, loc = 23, scale = 1.5, shape = 0)
 #' 
 #' ## True mode
 #' gevMode(loc = 23, scale = 1.5, shape = 0)

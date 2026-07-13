@@ -537,7 +537,7 @@ function(scale = 1,
 #' @export
 #' @rdname distrMode
 #' 
-#' @examples 
+#' @examplesIf requireNamespace("VGAM")
 #' curve(VGAM::dpareto(x, scale = 1, shape = 1), xlim = c(0, 10))
 #' abline(v = paretoMode(scale = 1), col = 2)
 #' 
