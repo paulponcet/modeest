@@ -147,7 +147,7 @@ For a complete list of functions, use \code{library(help = "modeest")} or \code{
 
     \item Vieu P. (1996).
     A note on density mode estimation.
-    \emph{Statistics \& Probability Letters}, \bold{26}:297--307.
+    \emph{Statistics & Probability Letters}, \bold{26}:297--307.
 
     \item Leclerc J. (1997).
     Comportement limite fort de deux estimateurs du mode : le shorth et l'estimateur naif.

@@ -63,7 +63,7 @@
 #' @return 
 #' \code{lientz} returns an object of class \code{c("lientz", "function")}; 
 #' this is a function with additional attributes:
-#' \itemize{
+#' \describe{
 #'   \item{x}{ the \code{x} argument}
 #'   \item{bw}{ the \code{bw} argument }
 #'   \item{call}{ the call which produced the result }
