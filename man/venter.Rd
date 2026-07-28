@@ -72,10 +72,9 @@ The user may call \code{venter} through
 \code{mlv(x, method = "venter", ...)}.
 }
 \examples{
-library(evd)
-
+\dontshow{if (requireNamespace("VGAM")) withAutoprint(\{ # examplesIf}
 # Unimodal distribution
-x <- rgev(1000, loc = 23, scale = 1.5, shape = 0)
+x <- VGAM::rgev(1000, loc = 23, scale = 1.5, shape = 0)
 
 ## True mode
 gevMode(loc = 23, scale = 1.5, shape = 0)
@@ -83,7 +82,7 @@ gevMode(loc = 23, scale = 1.5, shape = 0)
 ## Estimate of the mode
 venter(x, bw = 1/3)
 mlv(x, method = "venter", bw = 1/3)
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 \itemize{

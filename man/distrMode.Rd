@@ -379,9 +379,10 @@ M <- lnormMode(meanlog = 3, sdlog = 1.1)
 abline(v = M, col = 2)
 mlv("lnorm", meanlog = 3, sdlog = 1.1)
 
+\dontshow{if (requireNamespace("VGAM")) withAutoprint(\{ # examplesIf}
 curve(VGAM::dpareto(x, scale = 1, shape = 1), xlim = c(0, 10))
 abline(v = paretoMode(scale = 1), col = 2)
-
+\dontshow{\}) # examplesIf}
 ## Poisson distribution
 poisMode(lambda = 6)
 poisMode(lambda = 6.1)

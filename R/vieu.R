@@ -14,7 +14,7 @@
 #' @references 
 #' \itemize{ 
 #'   \item Vieu P. (1996). A note on density mode estimation. 
-#'   \emph{Statistics \& Probability Letters}, \bold{26}:297--307.
+#'   \emph{Statistics & Probability Letters}, \bold{26}:297--307.
 #' }
 #' 
 #' @param x 

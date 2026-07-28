@@ -6,9 +6,8 @@ Authors@R: person("Paul", "Poncet", , "paulponcet@yahoo.fr", role = c("aut", "cr
 Description: Provides estimators of the mode of univariate
     data or univariate distributions. 
 License: GPL-3
-LazyData: TRUE
 Depends:
-    R (>= 3.2)
+    R (>= 3.4)
 Imports:
     fBasics,
     stable,
@@ -16,11 +15,10 @@ Imports:
     stats,
     statip (>= 0.2.3)
 Suggests:
-    evd,
     knitr,
     mvtnorm,
     testthat,
     VGAM
 URL: https://github.com/paulponcet/modeest
 BugReports: https://github.com/paulponcet/modeest/issues
-RoxygenNote: 7.0.0
+Config/roxygen2/version: 8.0.0
