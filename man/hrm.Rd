@@ -10,8 +10,8 @@ hrm(x, bw = NULL, ...)
 \arguments{
 \item{x}{numeric. Vector of observations.}
 
-\item{bw}{numeric. The bandwidth to be used. Should belong to (0, 1]. 
-This gives the fraction of the observations to consider at 
+\item{bw}{numeric. The bandwidth to be used. Should belong to (0, 1].
+This gives the fraction of the observations to consider at
 each step of the iterative algorithm.}
 
 \item{...}{Additional arguments.}
@@ -20,29 +20,29 @@ each step of the iterative algorithm.}
 A numeric value is returned, the mode estimate.
 }
 \description{
-SINCE THIS FUNCTION USED TO DEPEND ON THE BIOCONDUCTOR PACKAGE 'GENEFILTER', 
+SINCE THIS FUNCTION USED TO DEPEND ON THE BIOCONDUCTOR PACKAGE 'GENEFILTER',
 IT IS CURRENTLY DEFUNCT.
 
-This function computes Bickel's half range mode estimator 
-described in Bickel (2002). It is a wrapper around the function 
+This function computes Bickel's half range mode estimator
+described in Bickel (2002). It is a wrapper around the function
 \code{half.range.mode} from package \pkg{genefilter}.
 }
 \details{
-The mode estimator is computed by iteratively identifying 
-densest half ranges. A densest half range is an interval 
-whose width equals half the current range, and which 
-contains the maximal number of observations. 
-The subset of observations falling in the selected 
-densest half range is then used to compute a new range, 
+The mode estimator is computed by iteratively identifying
+densest half ranges. A densest half range is an interval
+whose width equals half the current range, and which
+contains the maximal number of observations.
+The subset of observations falling in the selected
+densest half range is then used to compute a new range,
 and the procedure is iterated.
 }
 \note{
-The user may call \code{hrm} through 
+The user may call \code{hrm} through
 \code{mlv(x, method = "hrm", bw, ...)}.
 }
 \examples{
 \dontrun{
-# Unimodal distribution 
+# Unimodal distribution
 x <- rgamma(1000, shape = 31.9)
 ## True mode
 gammaMode(shape = 31.9)
@@ -55,26 +55,26 @@ mlv(x, method = "hrm", bw = 0.4)
 }
 \references{
 \itemize{
-  \item Bickel D.R. (2002). 
-  Robust estimators of the mode and skewness of continuous data. 
-  \emph{Computational Statistics and Data Analysis}, \bold{39}:153-163.
-  
-  \item Hedges S.B. and Shah P. (2003). 
-  Comparison of mode estimation methods and application in molecular clock analysis. 
-  \emph{BMC Bioinformatics}, \bold{4}:31-41.
-  
-  \item Bickel D.R. and Fruehwirth R. (2006). 
-  On a Fast, Robust Estimator of the Mode: 
-  Comparisons to Other Robust Estimators with Applications. 
-  \emph{Computational Statistics and Data Analysis}, \bold{50}(12):3500-3530. 
+\item Bickel D.R. (2002).
+Robust estimators of the mode and skewness of continuous data.
+\emph{Computational Statistics and Data Analysis}, \bold{39}:153-163.
+
+\item Hedges S.B. and Shah P. (2003).
+Comparison of mode estimation methods and application in molecular clock analysis.
+\emph{BMC Bioinformatics}, \bold{4}:31-41.
+
+\item Bickel D.R. and Fruehwirth R. (2006).
+On a Fast, Robust Estimator of the Mode:
+Comparisons to Other Robust Estimators with Applications.
+\emph{Computational Statistics and Data Analysis}, \bold{50}(12):3500-3530.
 }
 }
 \seealso{
-\code{\link[modeest]{mlv}()} for general mode estimation; 
-\code{\link[modeest]{hsm}()} for the half sample mode;  
+\code{\link[modeest]{mlv}()} for general mode estimation;
+\code{\link[modeest]{hsm}()} for the half sample mode;
 \code{\link[modeest]{venter}()} for the Venter mode estimate.
 }
 \author{
-The C and R code are due to Richard Bourgon \email{bourgon@stat.berkeley.edu}, 
+The C and R code are due to Richard Bourgon \email{bourgon@stat.berkeley.edu},
 see package \pkg{genefilter}. The algorithm is described in Bickel (2002).
 }

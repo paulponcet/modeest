@@ -10,7 +10,7 @@ asselin(x, bw = NULL, ...)
 \arguments{
 \item{x}{numeric. Vector of observations.}
 
-\item{bw}{numeric. A number in \code{(0, 1]}. 
+\item{bw}{numeric. A number in \code{(0, 1]}.
 If \code{bw = 1}, the selected 'modal chain' may be too long.}
 
 \item{...}{further arguments to be passed to the \code{\link[stats]{quantile}} function.}
@@ -19,11 +19,11 @@ If \code{bw = 1}, the selected 'modal chain' may be too long.}
 A numeric value is returned, the mode estimate.
 }
 \description{
-This mode estimator is based on the algorithm 
+This mode estimator is based on the algorithm
 described in Asselin de Beauville (1978).
 }
 \note{
-The user may call \code{asselin} through 
+The user may call \code{asselin} through
 \code{mlv(x, method = "asselin", ...)}.
 }
 \examples{
@@ -40,10 +40,10 @@ mlv(x, method = "asselin")
 }
 \references{
 \itemize{
-  \item Asselin de Beauville J.-P. (1978). 
-  Estimation non parametrique de la densite et du mode, 
-  exemple de la distribution Gamma. 
-  \emph{Revue de Statistique Appliquee}, \bold{26}(3):47-70.
+\item Asselin de Beauville J.-P. (1978).
+Estimation non parametrique de la densite et du mode,
+exemple de la distribution Gamma.
+\emph{Revue de Statistique Appliquee}, \bold{26}(3):47-70.
 }
 }
 \seealso{
