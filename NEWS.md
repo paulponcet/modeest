@@ -1,91 +1,78 @@
-# modeest 2.4.0 (2019-11-17)
+# modeest 2.5.0 (2026-09-20)
 
-## Breaking changes
+* Lint various parts of the code.
 
-* Defunct `hrm()` due to difficulties in installing automatically Bioconductor's 'genefilter' dependency. This function shall be reintroduced in a future version.
 
-## Performance
+# modeest 2.3.4 (2019-07-15)
 
-* Remove dependency to the 'genefilter' package.
+* Fix bug in `betaMode()`. Results were incorrect when `shape1` or `shape2` was 
+less than `1`. 
 
 
 # modeest 2.3.3
 
-## Features
+* Update documentation. 
 
-* Simplify and improve the code of `parzen()`, `vieu()`, `tsybakov()`, `meanshift()`, `mlv()`. 
-
-* Improve documentation. 
+* Simplify and improve the code of `parzen()`, `vieu()`, 
+`tsybakov()`, `meanshift()`, `mlv()`. 
 
 
 # modeest 2.3.2
 
-## Breaking changes
+* BREAKING CHANGE: `mlv()` no longer returns a list, it returns a vector of 
+values (usually one single value) for the sake of simplicity and homogeneity 
+with functions such as `mean()` or `median()`. 
 
-* `mlv()` no longer returns a list, it returns a vector of 
-values (usually one single value) for the sake of simplicity and homogeneity with functions such as `mean()` or `median()`. 
-
-* Move `mfv()` and `mfv1()` to package `statip` (and reexport them).
+* Move `mfv()` and `mfv1()` to package `statip` and reexport then.
 
 * Remove `discrete()`. Use `mfv()` or `mfv1()` instead. 
 
 
 # modeest 2.3.0 
 
-## Features
-
 * Move hidden kernel related functions to package `statip`. 
 
-* Deprecate `discrete()`; it will be removed in a future version of the package. Start using `mfv()` instead. 
+* `discrete()` is now deprecated and will be removed in a future version of the 
+package. Use `mfv()` instead. 
 
-* Add `mfv1()`, which always returns a length 1 value (so that `mfv1(x)==mfv(x)[[1L]]`). 
+* `mfv1()` is a new function that always returns a length 1 value (so that `mfv1(x)==mfv(x)[[1L]]`). 
 
 
 # modeest 2.2
 
-## Bug fixes
-
 * Thank you to W. H. Beasley who pointed out a slight mistake in the 
-calculation of Bickel's skewness in `mlv.integer()`. Now the skewness is set at `NA` in case of multiple modes. 
+calculation of Bickel's skewness in `mlv.integer()`. Now the skewness is set at 
+`NA` in case of multiple modes. 
 
-* As documented under `?as.numeric`, the function `as.numeric.mlv()` was not correct, and is now replaced by `as.double.mlv()`. 
+* Add meanshift mode estimator. 
 
-## Features
-
-* Add the meanshift mode estimator. 
+* As documented under `?as.numeric`, the function `as.numeric.mlv()` was not 
+correct, and is now replaced by `as.double.mlv()`. 
 
 
 # modeest 2.1
 
-## Breaking changes
-
-* Remove function `symstbMode()`. 
-
-## Bug fixes
-
 * Thank you to C. Lepoittevin and K. Fijorek who pointed out a misuse of 
-`ifelse` in the function `hsm()`. This has been corrected, so now `hsm` works correctly.
-
-## Features
+`ifelse` in the function `hsm()`. This has been corrected, so now `hsm` works 
+correctly. 
 
 * Add functions `fiskMode()`, `gompertzMode()`, `koenkerMode()`, `kumarMode()`, 
 `laplaceMode()`, `paralogisticMode()`, `paretoMode()`, `rayleighMode()`. 
 
+* Remove function `symstbMode()`. 
+
 
 # modeest 1.09
 
-## Breaking changes
+* Add the Asselin de Beauville mode estimator. 
 
-* Remove methods for the Chernoff distribution, because of their lack of efficiency. 
+* Add function `as.numeric.mlv()`. 
+
+* Methods for the Chernoff distribution are provisionally suppressed, because 
+of their lack of efficiency. 
 
 * Remove the DIP statistic. 
 
 * In function `tsybakov()`, the argument `djeddour` is renamed `dmp`. 
 
 * In functions `parzen()` and `mlv.density()`, the argument `biau` is renamed `abc`. 
-
-## Features
-
-* Add the Asselin de Beauville mode estimator. 
-
-* Add function `as.numeric.mlv()`. 

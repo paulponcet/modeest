@@ -69,31 +69,39 @@ export(venter)
 export(vieu)
 export(weibullMode)
 export(yulesMode)
-importFrom(fBasics,ghMode)
-importFrom(fBasics,ghtMode)
-importFrom(fBasics,gldMode)
-importFrom(fBasics,hypMode)
-importFrom(fBasics,nigMode)
-importFrom(graphics,legend)
-importFrom(graphics,locator)
-importFrom(graphics,plot)
-importFrom(graphics,points)
+importFrom(fBasics,
+  ghMode,
+  ghtMode,
+  gldMode,
+  hypMode,
+  nigMode
+)
+importFrom(graphics,
+  legend,
+  locator,
+  plot,
+  points
+)
 importFrom(stable,stable.mode)
 importFrom(stabledist,dstable)
-importFrom(statip,.kernelsList)
-importFrom(statip,bandwidth)
-importFrom(statip,kernelfun)
-importFrom(statip,mfv)
-importFrom(statip,mfv1)
-importFrom(statip,name2distr)
-importFrom(stats,bw.SJ)
-importFrom(stats,bw.bcv)
-importFrom(stats,bw.nrd)
-importFrom(stats,bw.nrd0)
-importFrom(stats,bw.ucv)
-importFrom(stats,median)
-importFrom(stats,optim)
-importFrom(stats,optimize)
-importFrom(stats,quantile)
-importFrom(stats,sd)
-importFrom(stats,uniroot)
+importFrom(statip,
+  .kernelsList,
+  bandwidth,
+  kernelfun,
+  mfv,
+  mfv1,
+  name2distr
+)
+importFrom(stats,
+  bw.SJ,
+  bw.bcv,
+  bw.nrd,
+  bw.nrd0,
+  bw.ucv,
+  median,
+  optim,
+  optimize,
+  quantile,
+  sd,
+  uniroot
+)
