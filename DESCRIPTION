@@ -1,13 +1,15 @@
 Package: modeest
 Type: Package
 Title: Mode Estimation
-Version: 2.4.0
+Version: 2.5.0
 Authors@R: person("Paul", "Poncet", , "paulponcet@yahoo.fr", role = c("aut", "cre"))
 Description: Provides estimators of the mode of univariate
     data or univariate distributions. 
 License: GPL-3
+LazyData: TRUE
+ByteCompile: TRUE
 Depends:
-    R (>= 3.4)
+    R (>= 3.2)
 Imports:
     fBasics,
     stable,
@@ -15,10 +17,13 @@ Imports:
     stats,
     statip (>= 0.2.3)
 Suggests:
+    evd,
     knitr,
     mvtnorm,
     testthat,
     VGAM
 URL: https://github.com/paulponcet/modeest
 BugReports: https://github.com/paulponcet/modeest/issues
-Config/roxygen2/version: 8.0.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.0
