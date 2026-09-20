@@ -457,6 +457,9 @@ rayleighMode <- function(scale = 1.) {
 # Stable distribution
 #' @inheritParams stabledist::dstable
 #'
+#' @param gamma
+#' scale parameter.
+#'
 #' @importFrom stabledist dstable
 #' @importFrom stats optimize
 #' @export

@@ -210,6 +210,8 @@ poisMode(lambda)
 \item{meanlog, sdlog}{mean and standard deviation of the distribution
     on the log scale with default values of \code{0} and \code{1} respectively.}
 
+\item{gamma}{scale parameter.}
+
 \item{loc}{vector of (real) location parameters.}
 
 \item{disp}{vector of (positive) dispersion parameters.}
