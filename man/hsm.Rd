@@ -10,14 +10,14 @@ hsm(x, bw = NULL, k, tie.action = "mean", tie.limit = 0.05, ...)
 \arguments{
 \item{x}{numeric. Vector of observations.}
 
-\item{bw}{numeric or function. 
+\item{bw}{numeric or function.
 The bandwidth to be used. Should belong to (0, 1].}
 
 \item{k}{numeric. See 'Details'.}
 
 \item{tie.action}{character. The action to take if a tie is encountered.}
 
-\item{tie.limit}{numeric. A limit deciding whether or not a warning 
+\item{tie.limit}{numeric. A limit deciding whether or not a warning
 is given when a tie is encountered.}
 
 \item{...}{Additional arguments.}
@@ -26,23 +26,23 @@ is given when a tie is encountered.}
 A numeric value is returned, the mode estimate.
 }
 \description{
-This function computes the Robertson-Cryer mode estimator 
-described in Robertson and Cryer (1974), 
-also called half sample mode (if \code{bw = 1/2}) 
+This function computes the Robertson-Cryer mode estimator
+described in Robertson and Cryer (1974),
+also called half sample mode (if \code{bw = 1/2})
 or fraction sample mode (for some other \code{bw}) by Bickel (2006).
 }
 \details{
-The modal interval, i.e. the shortest interval among 
-intervals containing \code{k+1} observations, is computed 
-iteratively, until only one value is found, the mode estimate. 
-At each step \eqn{i}{i}, one takes \code{k = ceiling(bw*n) - 1}, 
-where \code{n} is the length of the modal interval computed 
-at step \eqn{i-}{i-}\code{1}. 
-If \code{bw} is of class \code{"function"}, 
+The modal interval, i.e. the shortest interval among
+intervals containing \code{k+1} observations, is computed
+iteratively, until only one value is found, the mode estimate.
+At each step \eqn{i}{i}, one takes \code{k = ceiling(bw*n) - 1},
+where \code{n} is the length of the modal interval computed
+at step \eqn{i-}{i-}\code{1}.
+If \code{bw} is of class \code{"function"},
 then \code{k = ceiling(bw(n)) - 1} instead.
 }
 \note{
-The user may call \code{hsm} through 
+The user may call \code{hsm} through
 \code{mlv(x, method = "hsm", ...)}.
 }
 \examples{
@@ -59,22 +59,22 @@ mlv(x, method = "hsm", bw = bandwidth, alpha = 2)
 
 }
 \references{
-\itemize{ 
-  \item Robertson T. and Cryer J.D. (1974). 
-  An iterative procedure for estimating the mode. 
-  \emph{J. Amer. Statist. Assoc.}, \bold{69}(348):1012-1016.
-  
-  \item Bickel D.R. and Fruehwirth R. (2006). 
-  On a Fast, Robust Estimator of the Mode: Comparisons to 
-  Other Robust Estimators with Applications. 
-  \emph{Computational Statistics and Data Analysis}, \bold{50}(12):3500-3530.
+\itemize{
+\item Robertson T. and Cryer J.D. (1974).
+An iterative procedure for estimating the mode.
+\emph{J. Amer. Statist. Assoc.}, \bold{69}(348):1012-1016.
+
+\item Bickel D.R. and Fruehwirth R. (2006).
+On a Fast, Robust Estimator of the Mode: Comparisons to
+Other Robust Estimators with Applications.
+\emph{Computational Statistics and Data Analysis}, \bold{50}(12):3500-3530.
 }
 }
 \seealso{
-\code{\link[modeest]{mlv}} for general mode estimation; 
+\code{\link[modeest]{mlv}} for general mode estimation;
 \code{\link[modeest]{venter}} for the Venter mode estimate.
 }
 \author{
-D.R. Bickel for the original code, 
+D.R. Bickel for the original code,
 P. Poncet for the slight modifications introduced.
 }

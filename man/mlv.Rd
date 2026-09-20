@@ -31,55 +31,55 @@ mlv1(x, ...)
 
 \item{na.rm}{logical. Should missing values be removed?}
 
-\item{bw}{numeric. The bandwidth to be used. 
+\item{bw}{numeric. The bandwidth to be used.
 This may have different meanings regarding the \code{method} used.}
 
 \item{method}{character. One of the methods available for computing the mode estimate. See 'Details'.}
 }
 \value{
-A vector of the same type as \code{x}. 
+A vector of the same type as \code{x}.
 Be aware that the length of this vector can be \code{> 1}.
 }
 \description{
-\code{mlv} is a generic function for estimating the mode of a univariate distribution. 
-Different estimates (or methods) are provided: 
+\code{mlv} is a generic function for estimating the mode of a univariate distribution.
+Different estimates (or methods) are provided:
 \itemize{
-  \item \code{\link{mfv}}, which returns the most frequent value(s) in a given numerical vector, 
-  \item the \code{\link{Lientz}} mode estimator, which is the value minimizing the Lientz function estimate, 
-  \item the Chernoff mode estimator, also called \code{\link{naive}} mode estimator, 
-  which is defined as the center of the interval of given length containing the most observations, 
-  \item the \code{\link{Venter}} mode estimator, including the \code{\link{shorth}}, i.e. the midpoint of the modal interval, 
-  \item the \code{\link{Grenander}} mode estimator, 
-  \item the half sample mode (\code{\link{HSM}}) and the half range mode (\code{\link{HRM}}), which are iterative versions of the Venter mode estimator, 
-  \item \code{\link{Parzen}}'s kernel mode estimator, which is the value maximizing the kernel density estimate, 
-  \item the \code{\link{Tsybakov}} mode estimator, based on a gradient-like recursive algorithm, 
-  \item the \code{\link{Asselin}} de Beauville mode estimator, based on a algorithm detecting chains and holes in the sample, 
-  \item the \code{\link{Vieu}} mode estimator, 
-  \item the \code{\link{meanshift}} mode estimator. 
+\item \code{\link{mfv}}, which returns the most frequent value(s) in a given numerical vector,
+\item the \code{\link{Lientz}} mode estimator, which is the value minimizing the Lientz function estimate,
+\item the Chernoff mode estimator, also called \code{\link{naive}} mode estimator,
+which is defined as the center of the interval of given length containing the most observations,
+\item the \code{\link{Venter}} mode estimator, including the \code{\link{shorth}}, i.e. the midpoint of the modal interval,
+\item the \code{\link{Grenander}} mode estimator,
+\item the half sample mode (\code{\link{HSM}}) and the half range mode (\code{\link{HRM}}), which are iterative versions of the Venter mode estimator,
+\item \code{\link{Parzen}}'s kernel mode estimator, which is the value maximizing the kernel density estimate,
+\item the \code{\link{Tsybakov}} mode estimator, based on a gradient-like recursive algorithm,
+\item the \code{\link{Asselin}} de Beauville mode estimator, based on a algorithm detecting chains and holes in the sample,
+\item the \code{\link{Vieu}} mode estimator,
+\item the \code{\link{meanshift}} mode estimator.
 }
 
 \code{mlv} can also be used to compute the mode of a given distribution, with \code{mlv.character}.
 }
 \details{
-For the default method of \code{mlv}, available methods are \code{"lientz"}, 
-\code{"naive"}, \code{"venter"}, 
-\code{"grenander"}, \code{"hsm"}, \code{"parzen"}, 
-\code{"tsybakov"}, \code{"asselin"}, and \code{"meanshift"}. 
-See the description above and the associated links. 
+For the default method of \code{mlv}, available methods are \code{"lientz"},
+\code{"naive"}, \code{"venter"},
+\code{"grenander"}, \code{"hsm"}, \code{"parzen"},
+\code{"tsybakov"}, \code{"asselin"}, and \code{"meanshift"}.
+See the description above and the associated links.
 
-If \code{x} is of class \code{"character"} (with length > 1), 
-\code{"factor"}, or \code{"integer"}, then the most frequent value found in 
-\code{x} is returned using \code{\link[statip]{mfv}} from package 
-\pkg{statip}. 
+If \code{x} is of class \code{"character"} (with length > 1),
+\code{"factor"}, or \code{"integer"}, then the most frequent value found in
+\code{x} is returned using \code{\link[statip]{mfv}} from package
+\pkg{statip}.
 
-If \code{x} is of class \code{"character"} (with length 1), 
-\code{x} should be one of \code{"beta"}, \code{"cauchy"}, \code{"gev"}, etc. 
-i.e. a character for which a function \code{*Mode} exists 
-(for instance \code{betaMode}, \code{cauchyMode}, etc.). 
-See \code{\link[modeest]{distrMode}} for the available functions. 
-The mode of the corresponding distribution is returned. 
+If \code{x} is of class \code{"character"} (with length 1),
+\code{x} should be one of \code{"beta"}, \code{"cauchy"}, \code{"gev"}, etc.
+i.e. a character for which a function \code{*Mode} exists
+(for instance \code{betaMode}, \code{cauchyMode}, etc.).
+See \code{\link[modeest]{distrMode}} for the available functions.
+The mode of the corresponding distribution is returned.
 
-If \code{x} is of class \code{mlv.lientz}, see \code{\link[modeest]{Lientz}} 
+If \code{x} is of class \code{mlv.lientz}, see \code{\link[modeest]{Lientz}}
 for more details.
 }
 \examples{
@@ -91,12 +91,12 @@ betaMode(23, 4)
 # or
 mlv("beta", shape1 = 23, shape2 = 4)
 
-## Be aware of this behaviour: 
+## Be aware of this behaviour:
 mlv("norm") # returns 0, the mode of the standard normal distribution
 mlv("normal") # returns 0 again, since "normal" is matched with "norm"
-mlv("abnormal") # returns "abnormal", since the input vector "abrnormal" 
-# is not recognized as a distribution name, hence is taken as a character 
-# vector from which the most frequent value is requested. 
+mlv("abnormal") # returns "abnormal", since the input vector "abrnormal"
+# is not recognized as a distribution name, hence is taken as a character
+# vector from which the most frequent value is requested.
 
 ## Estimate of the mode
 mlv(x, method = "lientz", bw = 0.2)
@@ -115,14 +115,14 @@ mlv(x, method = "meanshift")
 See the references on mode estimation on the \code{\link[modeest]{modeest-package}}'s page.
 }
 \seealso{
-\code{\link[statip]{mfv}}, 
-\code{\link[modeest]{parzen}}, 
-\code{\link[modeest]{venter}}, 
+\code{\link[statip]{mfv}},
+\code{\link[modeest]{parzen}},
+\code{\link[modeest]{venter}},
 \code{\link[modeest]{meanshift}},
-\code{\link[modeest]{grenander}}, 
-\code{\link[modeest]{hsm}}, 
-\code{\link[modeest]{lientz}}, 
-\code{\link[modeest]{naive}}, 
-\code{\link[modeest]{tsybakov}}, 
+\code{\link[modeest]{grenander}},
+\code{\link[modeest]{hsm}},
+\code{\link[modeest]{lientz}},
+\code{\link[modeest]{naive}},
+\code{\link[modeest]{tsybakov}},
 \code{\link[modeest]{skewness}}
 }

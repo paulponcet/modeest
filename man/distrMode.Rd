@@ -49,11 +49,11 @@
 \usage{
 distrMode(x, ...)
 
-betaMode(shape1, shape2, ncp = 0)
+betaMode(shape1, shape2, ncp = 0L)
 
 cauchyMode(location = 0, ...)
 
-chisqMode(df, ncp = 0)
+chisqMode(df, ncp = 0L)
 
 dagumMode(scale = 1, shape1.a, shape2.p)
 
@@ -71,11 +71,11 @@ normMode(mean = 0, ...)
 
 gevMode(location = 0, scale = 1, shape = 0, ...)
 
-ghMode(alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2)
+ghMode(alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -0.5)
 
 ghtMode(beta = 0.1, delta = 1, mu = 0, nu = 10)
 
-gldMode(lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8)
+gldMode(lambda1 = 0, lambda2 = -1, lambda3 = -0.125, lambda4 = -0.125)
 
 gompertzMode(scale = 1, shape)
 
@@ -83,7 +83,7 @@ gpdMode(location = 0, scale = 1, shape = 0)
 
 gumbelMode(location = 0, ...)
 
-hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
+hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1L, 2L, 3L, 4L))
 
 koenkerMode(location = 0, ...)
 
@@ -140,194 +140,75 @@ poisMode(lambda)
 
 \item{...}{Additional parameters.}
 
-\item{shape1}{non-negative parameters of the Beta distribution.}
-
-\item{shape2}{non-negative parameters of the Beta distribution.}
+\item{shape1, shape2}{non-negative parameters of the Beta distribution.}
 
 \item{ncp}{non-centrality parameter.}
 
-\item{location}{location and scale parameters.}
+\item{location, scale}{location and scale parameters.}
 
 \item{df}{degrees of freedom (non-negative, but can be non-integer).}
 
-\item{scale}{location and scale parameters.}
+\item{shape1.a, shape2.p}{shape parameters.}
 
-\item{shape1.a}{shape parameters.}
+\item{df1, df2}{degrees of freedom.  \code{Inf} is allowed.}
 
-\item{shape2.p}{shape parameters.}
-
-\item{df1}{degrees of freedom.  \code{Inf} is allowed.}
-
-\item{df2}{degrees of freedom.  \code{Inf} is allowed.}
-
-\item{shape}{the location parameter \eqn{a},
-  scale parameter \eqn{b}, and shape parameter \eqn{s}.}
+\item{shape}{the shape parameter \eqn{\xi}{xi}.}
 
 \item{rate}{vector of rates.}
 
 \item{mean}{vector of means.}
 
 \item{alpha}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These is the meaning of the parameters in the first 
-        parameterization \code{pm=1} which is the default 
-        parameterization selection.
-        In the second parameterization, \code{pm=2} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{zeta} and \code{rho}.
-        In the third parameterization, \code{pm=3} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{xi} and \code{chi}.
-        In the fourth parameterization, \code{pm=4} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{a.bar} and \code{b.bar}.
-        }
+    first shape parameter.
+  }
 
 \item{beta}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These is the meaning of the parameters in the first 
-        parameterization \code{pm=1} which is the default 
-        parameterization selection.
-        In the second parameterization, \code{pm=2} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{zeta} and \code{rho}.
-        In the third parameterization, \code{pm=3} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{xi} and \code{chi}.
-        In the fourth parameterization, \code{pm=4} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{a.bar} and \code{b.bar}.
-        }
+    second shape parameter, should in the range \code{(0, alpha).}
+  }
 
 \item{delta}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These is the meaning of the parameters in the first 
-        parameterization \code{pm=1} which is the default 
-        parameterization selection.
-        In the second parameterization, \code{pm=2} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{zeta} and \code{rho}.
-        In the third parameterization, \code{pm=3} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{xi} and \code{chi}.
-        In the fourth parameterization, \code{pm=4} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{a.bar} and \code{b.bar}.
-        }
+    scale parameter, must be zero or positive.
+  }
 
 \item{mu}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These is the meaning of the parameters in the first 
-        parameterization \code{pm=1} which is the default 
-        parameterization selection.
-        In the second parameterization, \code{pm=2} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{zeta} and \code{rho}.
-        In the third parameterization, \code{pm=3} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{xi} and \code{chi}.
-        In the fourth parameterization, \code{pm=4} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{a.bar} and \code{b.bar}.
-        }
+    location parameter, by default 0.
+  }
 
 \item{lambda}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These is the meaning of the parameters in the first 
-        parameterization \code{pm=1} which is the default 
-        parameterization selection.
-        In the second parameterization, \code{pm=2} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{zeta} and \code{rho}.
-        In the third parameterization, \code{pm=3} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{xi} and \code{chi}.
-        In the fourth parameterization, \code{pm=4} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{a.bar} and \code{b.bar}.
-        }
+    defines the sublclass, by default \eqn{-1/2}.
+  }
 
 \item{nu}{
-        a numeric value, the number of degrees of freedom.
-        Note, \code{alpha} takes the limit of \code{abs(beta)}, 
-        and \code{lambda=-nu/2}.
-        }
+    a numeric value, the number of degrees of freedom.
+    Note, \code{alpha} takes the limit of \code{abs(beta)}, 
+    and \code{lambda=-nu/2}.
+  }
 
 \item{lambda1}{
-    are numeric values where
-    \code{lambda1} is the location parameter,
-    \code{lambda2} is the location parameter,
-    \code{lambda3} is the first shape parameter, and
-    \code{lambda4} is the second shape parameter.
+    location parameter.
   }
 
 \item{lambda2}{
-    are numeric values where
-    \code{lambda1} is the location parameter,
-    \code{lambda2} is the location parameter,
-    \code{lambda3} is the first shape parameter, and
-    \code{lambda4} is the second shape parameter.
+    scale parameter.
   }
 
 \item{lambda3}{
-    are numeric values where
-    \code{lambda1} is the location parameter,
-    \code{lambda2} is the location parameter,
-    \code{lambda3} is the first shape parameter, and
-    \code{lambda4} is the second shape parameter.
+    first shape parameter.
   }
 
 \item{lambda4}{
-    are numeric values where
-    \code{lambda1} is the location parameter,
-    \code{lambda2} is the location parameter,
-    \code{lambda3} is the first shape parameter, and
-    \code{lambda4} is the second shape parameter.
+    second shape parameter.
   }
 
 \item{pm}{
-        an integer value between \code{1} and \code{4} for the 
-        selection of the parameterization. The default takes the
-        first parameterization.       
-        }
 
-\item{meanlog}{mean and standard deviation of the distribution
-    on the log scale with default values of \code{0} and \code{1} respectively.}
+    an integer value between \code{1} and \code{4} for the selection of
+    the parameterization. The default takes the first parameterization.
 
-\item{sdlog}{mean and standard deviation of the distribution
-    on the log scale with default values of \code{0} and \code{1} respectively.}
-
-\item{gamma}{
-    value of the index parameter \code{alpha} in the interval= \eqn{(0, 2]};
-    skewness parameter \code{beta}, in the range \eqn{[-1, 1]};
-    scale parameter \code{gamma}; and location (or \sQuote{shift})
-    parameter \code{delta}.
   }
+
+\item{meanlog, sdlog}{mean and standard deviation of the distribution
+    on the log scale with default values of \code{0} and \code{1} respectively.}
 
 \item{loc}{vector of (real) location parameters.}
 
@@ -337,9 +218,7 @@ poisMode(lambda)
 
 \item{tail}{vector of parameters (in [1,2]) related to the tail thickness.}
 
-\item{min}{lower and upper limits of the distribution.  Must be finite.}
-
-\item{max}{lower and upper limits of the distribution.  Must be finite.}
+\item{min, max}{lower and upper limits of the distribution.  Must be finite.}
 
 \item{prob}{Probability of success on each trial.}
 
@@ -350,30 +229,31 @@ poisMode(lambda)
 \item{n}{number of observations. If \code{length(n) > 1}, the length
     is taken to be the number required.}
 
-\item{k}{the number of balls drawn from the urn.}
+\item{k}{the number of balls drawn from the urn, hence must be in
+    \eqn{0,1,\dots, m+n}.}
 }
 \value{
 A numeric value is returned, the (true) mode of the distribution.
 }
 \description{
-These functions return the mode of the main probability 
+These functions return the mode of the main probability
 distributions implemented in R.
 }
 \note{
-Some functions like \code{normMode} or \code{cauchyMode}, which relate 
-to symmetric distributions, are trivial, but are implemented for the sake of 
+Some functions like \code{normMode} or \code{cauchyMode}, which relate
+to symmetric distributions, are trivial, but are implemented for the sake of
 exhaustivity.
 }
 \examples{
 ## Beta distribution
-curve(dbeta(x, shape1 = 2, shape2 = 3.1), 
-      xlim = c(0,1), ylab = "Beta density")
-M <- betaMode(shape1 = 2, shape2 = 3.1)
-abline(v = M, col = 2)
-mlv("beta", shape1 = 2, shape2 = 3.1)
+curve(dbeta(x, shape1 = 2., shape2 = 3.1),
+      xlim = c(0., 1.), ylab = "Beta density")
+M <- betaMode(shape1 = 2., shape2 = 3.1)
+abline(v = M, col = 2L)
+mlv("beta", shape1 = 2., shape2 = 3.1)
 
 ## Lognormal distribution
-curve(stats::dlnorm(x, meanlog = 3, sdlog = 1.1), 
+curve(stats::dlnorm(x, meanlog = 3, sdlog = 1.1),
       xlim = c(0, 10), ylab = "Lognormal density")
 M <- lnormMode(meanlog = 3, sdlog = 1.1)
 abline(v = M, col = 2)
@@ -384,20 +264,20 @@ curve(VGAM::dpareto(x, scale = 1, shape = 1), xlim = c(0, 10))
 abline(v = paretoMode(scale = 1), col = 2)
 \dontshow{\}) # examplesIf}
 ## Poisson distribution
-poisMode(lambda = 6)
+poisMode(lambda = 6.)
 poisMode(lambda = 6.1)
 mlv("poisson", lambda = 6.1)
 
 }
 \seealso{
-\code{\link[modeest]{mlv}} for the estimation of the mode; 
-the documentation of the related distributions 
+\code{\link[modeest]{mlv}} for the estimation of the mode;
+the documentation of the related distributions
 \code{\link[stats]{Beta}}, \code{\link[stats]{GammaDist}}, etc.
 }
 \author{
-\code{\link[fBasics]{ghMode}} and \code{\link[fBasics]{ghtMode}} are from 
-package \pkg{fBasics}; 
-\code{\link[fBasics]{hypMode}} was written by David Scott; 
-\code{\link[fBasics]{gldMode}}, \code{\link[fBasics]{nigMode}} and 
+\code{\link[fBasics]{ghMode}} and \code{\link[fBasics]{ghtMode}} are from
+package \pkg{fBasics};
+\code{\link[fBasics]{hypMode}} was written by David Scott;
+\code{\link[fBasics]{gldMode}}, \code{\link[fBasics]{nigMode}} and
 \code{\link[stabledist]{stableMode}} were written by Diethelm Wuertz.
 }

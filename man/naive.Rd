@@ -6,7 +6,7 @@
 \alias{chernoff}
 \title{The Chernoff or 'naive' mode estimator}
 \usage{
-naive(x, bw = 1/2)
+naive(x, bw = 0.5)
 }
 \arguments{
 \item{x}{numeric. Vector of observations.}
@@ -14,18 +14,18 @@ naive(x, bw = 1/2)
 \item{bw}{numeric. The smoothing bandwidth to be used. Should belong to (0, 1). See below.}
 }
 \value{
-A numeric vector is returned, the mode estimate, 
-which is the center of the interval of length \code{2*bw} 
+A numeric vector is returned, the mode estimate,
+which is the center of the interval of length \code{2*bw}
 containing the most observations.
 }
 \description{
-This estimator, also called the *naive* mode estimator, is defined as the 
-center of the interval of given length containing the most observations. 
-It is identical to Parzen's kernel mode estimator, when the kernel is chosen 
+This estimator, also called the \emph{naive} mode estimator, is defined as the
+center of the interval of given length containing the most observations.
+It is identical to Parzen's kernel mode estimator, when the kernel is chosen
 to be the uniform kernel.
 }
 \note{
-The user may call \code{naive} through 
+The user may call \code{naive} through
 \code{mlv(x, method = "naive", bw)}.
 }
 \examples{
@@ -41,18 +41,18 @@ mlv(x, method = "naive", bw = 1/4)
 
 }
 \references{
-\itemize{ 
-  \item Chernoff H. (1964). 
-  Estimation of the mode. 
-  \emph{Ann. Inst. Statist. Math.}, \bold{16}:31-41.
-  
-  \item Leclerc J. (1997). 
-  Comportement limite fort de deux estimateurs du mode : 
-  le shorth et l'estimateur naif. 
-  \emph{C. R. Acad. Sci. Paris, Serie I}, \bold{325}(11):1207-1210.
+\itemize{
+\item Chernoff H. (1964).
+Estimation of the mode.
+\emph{Ann. Inst. Statist. Math.}, \bold{16}:31-41.
+
+\item Leclerc J. (1997).
+Comportement limite fort de deux estimateurs du mode :
+le shorth et l'estimateur naif.
+\emph{C. R. Acad. Sci. Paris, Serie I}, \bold{325}(11):1207-1210.
 }
 }
 \seealso{
-\code{\link[modeest]{mlv}} for general mode estimation; 
+\code{\link[modeest]{mlv}} for general mode estimation;
 \code{\link[modeest]{parzen}} for Parzen's kernel mode estimation.
 }

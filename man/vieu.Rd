@@ -12,30 +12,30 @@ vieu(x, bw = NULL, kernel = "gaussian", abc = FALSE, ...)
 
 \item{bw}{numeric. The smoothing bandwidth to be used.}
 
-\item{kernel}{character. The kernel to be used. Available kernels are \code{"biweight"}, 
-\code{"cosine"}, \code{"eddy"}, \code{"epanechnikov"}, \code{"gaussian"}, 
-\code{"optcosine"}, \code{"rectangular"}, \code{"triangular"}, 
-\code{"uniform"}. See \code{\link[stats]{density}} for more details on some 
+\item{kernel}{character. The kernel to be used. Available kernels are \code{"biweight"},
+\code{"cosine"}, \code{"eddy"}, \code{"epanechnikov"}, \code{"gaussian"},
+\code{"optcosine"}, \code{"rectangular"}, \code{"triangular"},
+\code{"uniform"}. See \code{\link[stats]{density}} for more details on some
 of these kernels.}
 
-\item{abc}{logical. If \code{FALSE} (the default), the root of the density derivate 
+\item{abc}{logical. If \code{FALSE} (the default), the root of the density derivate
 estimate is searched with \code{\link[stats]{uniroot}}.}
 
-\item{...}{If \code{abc = FALSE}, further arguments to be passed to 
+\item{...}{If \code{abc = FALSE}, further arguments to be passed to
 \code{\link[stats]{uniroot}}.}
 }
 \value{
-\code{vieu} returns a numeric value, the mode estimate. If \code{abc = TRUE}, 
-the \code{x} value at which the density derivative estimate is null is 
+\code{vieu} returns a numeric value, the mode estimate. If \code{abc = TRUE},
+the \code{x} value at which the density derivative estimate is null is
 returned. Otherwise, the \code{\link[stats]{uniroot}} method is used.
 }
 \description{
-Vieu's mode estimator is the value at which the kernel density derivative 
+Vieu's mode estimator is the value at which the kernel density derivative
 estimate is null.
 }
 \note{
-The user may call \code{vieu} through 
-\code{mlv(x, method = "vieu", ...)}. 
+The user may call \code{vieu} through
+\code{mlv(x, method = "vieu", ...)}.
 
 Presently, \code{vieu} is quite slow.
 }
@@ -51,9 +51,9 @@ mlv(x, method = "vieu", kernel = "gaussian")
 
 }
 \references{
-\itemize{ 
-  \item Vieu P. (1996). A note on density mode estimation. 
-  \emph{Statistics & Probability Letters}, \bold{26}:297--307.
+\itemize{
+\item Vieu P. (1996). A note on density mode estimation.
+\emph{Statistics & Probability Letters}, \bold{26}:297--307.
 }
 }
 \seealso{

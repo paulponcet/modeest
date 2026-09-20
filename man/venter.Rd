@@ -10,8 +10,8 @@ venter(
   x,
   bw = NULL,
   k,
-  iter = 1,
-  type = 1,
+  iter = 1L,
+  type = 1L,
   tie.action = "mean",
   tie.limit = 0.05,
   warn = FALSE
@@ -32,7 +32,7 @@ shorth(x, ...)
 
 \item{tie.action}{character. The action to take if a tie is encountered.}
 
-\item{tie.limit}{numeric. A limit deciding whether or not a warning is given when a tie is 
+\item{tie.limit}{numeric. A limit deciding whether or not a warning is given when a tie is
 encountered.}
 
 \item{warn}{logical. If \code{TRUE}, a warning is thrown when a tie is encountered.}
@@ -43,67 +43,68 @@ encountered.}
 A numeric value is returned, the mode estimate.
 }
 \description{
-This function computes the Venter mode estimator, also called the Dalenius, 
+This function computes the Venter mode estimator, also called the Dalenius,
 or LMS (Least Median Square) mode estimator.
 }
 \details{
-The modal interval, i.e. the shortest interval among intervals containing 
-\code{k+1} observations, is first computed. (In dimension > 1, this question 
+The modal interval, i.e. the shortest interval among intervals containing
+\code{k + 1} observations, is first computed. (In dimension > 1, this question
 is known as a 'k-enclosing problem'.)
-The user should either give the bandwidth \code{bw} or the argument \code{k}, 
-\code{k} being taken equal to \code{ceiling(bw*n) - 1} if missing, so 
-\code{bw} can be seen as the fraction of the observations to be considered 
-for the shortest interval. 
+The user should either give the bandwidth \code{bw} or the argument \code{k},
+\code{k} being taken equal to \code{ceiling(bw * n) - 1} if missing, so
+\code{bw} can be seen as the fraction of the observations to be considered
+for the shortest interval.
 
 If \code{type = 1}, the midpoint of the modal interval is returned.
-If \code{type = 2}, the \code{floor((k+1)/2)}th element of the modal 
+If \code{type = 2}, the \code{floor((k+1)/2)}th element of the modal
 interval is returned.
-If \code{type = 3} or \code{type = "dalenius"}, the median of the modal 
+If \code{type = 3} or \code{type = "dalenius"}, the median of the modal
 interval is returned.
-If \code{type = 4} or \code{type = "shorth"}, the mean of the modal interval 
+If \code{type = 4} or \code{type = "shorth"}, the mean of the modal interval
 is returned.
-If \code{type = 5} or \code{type = "ekblom"}, Ekblom's 
-\eqn{L_{-\infty}}{L_{-infinity}} estimate is returned, see Ekblom (1972). 
-If \code{type = 6} or \code{type = "hsm"}, the half sample mode (hsm) is 
+If \code{type = 5} or \code{type = "ekblom"}, Ekblom's
+\eqn{L_{-\infty}}{L_{-infinity}} estimate is returned, see Ekblom (1972).
+If \code{type = 6} or \code{type = "hsm"}, the half sample mode (hsm) is
 computed, see \code{\link{hsm}}.
 }
 \note{
-The user may call \code{venter} through 
+The user may call \code{venter} through
 \code{mlv(x, method = "venter", ...)}.
 }
 \examples{
-\dontshow{if (requireNamespace("VGAM")) withAutoprint(\{ # examplesIf}
+library(evd)
+
 # Unimodal distribution
-x <- VGAM::rgev(1000, loc = 23, scale = 1.5, shape = 0)
+x <- rgev(1000L, loc = 23., scale = 1.5, shape = 0.)
 
 ## True mode
-gevMode(loc = 23, scale = 1.5, shape = 0)
+gevMode(loc = 23., scale = 1.5, shape = 0.)
 
 ## Estimate of the mode
-venter(x, bw = 1/3)
-mlv(x, method = "venter", bw = 1/3)
-\dontshow{\}) # examplesIf}
+venter(x, bw = 1. / 3.)
+mlv(x, method = "venter", bw = 1. / 3.)
+
 }
 \references{
 \itemize{
-  \item Dalenius T. (1965). 
-  The Mode - A Negleted Statistical Parameter. 
-  \emph{J. Royal Statist. Soc. A}, \emph{128}:110-117.
-  
-  \item Venter J.H. (1967). 
-  On estimation of the mode. 
-  \emph{Ann. Math. Statist.}, \bold{38}(5):1446-1455. 
-  
-  \item Ekblom H. (1972). 
-  A Monte Carlo investigation of mode estimators in small samples. 
-  \emph{Applied Statistics}, \bold{21}:177-184.
+\item Dalenius T. (1965).
+The Mode - A Negleted Statistical Parameter.
+\emph{J. Royal Statist. Soc. A}, \emph{128}:110-117.
 
-  \item Leclerc J. (1997). 
-  Comportement limite fort de deux estimateurs du mode : le shorth et l'estimateur naif. 
-  \emph{C. R. Acad. Sci. Paris, Serie I}, \bold{325}(11):1207-1210.
+\item Venter J.H. (1967).
+On estimation of the mode.
+\emph{Ann. Math. Statist.}, \bold{38}(5):1446-1455.
+
+\item Ekblom H. (1972).
+A Monte Carlo investigation of mode estimators in small samples.
+\emph{Applied Statistics}, \bold{21}:177-184.
+
+\item Leclerc J. (1997).
+Comportement limite fort de deux estimateurs du mode : le shorth et l'estimateur naif.
+\emph{C. R. Acad. Sci. Paris, Serie I}, \bold{325}(11):1207-1210.
 }
 }
 \seealso{
-\code{\link[modeest]{mlv}} for general mode estimation, 
+\code{\link[modeest]{mlv}} for general mode estimation,
 \code{\link[modeest]{hsm}} for the half sample mode.
 }
