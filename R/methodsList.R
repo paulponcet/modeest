@@ -1,8 +1,6 @@
 
 # #' @export
-.methodsList <- 
-function()
-{
+.methodsList <- function() {
   c("asselin",
     #"chernoff",
     "density",
@@ -18,16 +16,16 @@ function()
     "lientz",
     #"lms",
     #"logspline", # cf. package logspline
-    "meanshift", 
-    "mfv",# most frequent value
+    "meanshift",
+    "mfv", # most frequent value
     #"mizoguchi",
     "naive",
     "parzen",
     #"robertson",
     "shorth",
-    #"splines",                 
+    #"splines",
     "tsybakov",
-    "venter", 
+    "venter",
     "vieu")
 #"wavelet",
 #"wtp")

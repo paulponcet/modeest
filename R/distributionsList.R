@@ -1,14 +1,12 @@
 
-.distributionsList <- 
-function()
-{
+.distributionsList <- function() {
   c("beta",
     "cauchy",
     "chisq",
     "dagum",
     "exp",
     "f",
-    "fisk", 
+    "fisk",
     "frechet",
     "gamma",
     "norm",
@@ -16,7 +14,7 @@ function()
     "gh",
     "ght",
     "gld",
-    "gompertz", 
+    "gompertz",
     "gpd",
     "gumbel",
     "hyp",
@@ -26,11 +24,11 @@ function()
     "logis",
     "lnorm",
     "lomax",
-    "maxwell", 
+    "maxwell",
     "mvnorm",
     "naka",
     "nig",
-    "paralogistic", 
+    "paralogistic",
     "pareto",
     "rayleigh",
     "stable",
